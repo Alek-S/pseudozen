@@ -1,0 +1,41 @@
+{
+  "name": "pseudozen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alek-S/pseudozen.git"
+  },
+  "author": "Alek Shnayder",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Alek-S/pseudozen/issues"
+  },
+  "homepage": "https://github.com/Alek-S/pseudozen#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "chalk": "^2.0.1",
+    "express": "^4.15.3",
+    "express-sessions": "^1.0.6",
+    "helmet": "^3.6.1",
+    "mongoose": "^4.11.1",
+    "morgan": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-react": "^6.24.1",
+    "mocha": "^3.4.2",
+    "supertest": "^3.0.0",
+    "webpack": "^3.1.0"
+  }
+}
