@@ -35,7 +35,9 @@ app.use(express.static('public'));
 
 //===MongoDB Connection with Mongoose==
 mongoose.Promise = global.Promise; //use standard Promise instead of Mongo's promise library
-mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost/zen');
+mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost/zen',{
+	useMongoClient: true
+});
 const db = mongoose.connection;
 
 db.on('error', function(error) { // Show any mongoose errors
@@ -44,6 +46,7 @@ db.on('error', function(error) { // Show any mongoose errors
 
 
 //===Routes===
+require('./controller/html_routes.js')(app);
 require('./controller/api_routes.js')(app);
 
 

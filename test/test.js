@@ -26,11 +26,11 @@ describe( chalk.yellow('HTML Routes:'), function () {
 			.expect(200, done);
 	});
 
-	it('responds to GET /assets/images/logo.svg with 200', function(done) {
-		request(server)
-			.get('/assets/images/logo.svg')
-			.expect(200, done);
-	});
+	// it('responds to GET /assets/images/logo.svg with 200', function(done) {
+	// 	request(server)
+	// 		.get('/assets/images/logo.svg')
+	// 		.expect(200, done);
+	// });
 });
 
 
