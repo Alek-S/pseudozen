@@ -1,12 +1,90 @@
-// const request = require('request');
+const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 //model
-//TODO
-//ex: const Article = require('../model/Article.js');
+const User = require('../model/User.js');
+const Project = require('../model/Project.js');
 
 
 module.exports = function(app) {
 
-	//===API ROUTES===
+	//===USER ROUTES===
+	
+	//retrieve user
+	app.get('/api/user/:email', (req,res)=>{
+		let email = req.params.email;
 
-};
+		if(!email){
+			res.json({'status': 'fail - missing email'});
+		}else{
+			User.findOne({'email': email}, (err,doc)=>{
+				if (err){
+					console.log(err);
+					res.json({'status': 'fail'});
+				}else{
+					res.json(doc);
+				}
+			});
+		}
+	});
+
+	//create new user
+	app.post('/api/user', (req,res)=>{
+		let email = req.body.email;
+		let passwordPlain = req.body.password;
+		let name = req.body.name;
+		const saltRounds = 12;
+
+		//was an email and password provided
+		if(!email || !passwordPlain){
+			res.json({'status': 'fail - missing required body fields'});
+		}else{
+
+			//check if email formatted correctly
+			if( validator.isEmail(email) ){
+				bcrypt.hash(passwordPlain, saltRounds, function(err, hash) {
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - password hashing'});
+					}else{
+						//check if already in db
+						User.count({email: email}, (err, count)=>{
+							if(err){
+								console.log(err);
+							}else{
+								console.log('count:', count);
+								//if already in db - return already saved
+								if(count > 0){
+									res.json({'status': 'fail - user already saved'});
+								}else{
+
+									User.create({
+										email: email,
+										password: hash,
+										name: name
+									},(err, entry)=>{
+										if(err){
+											console.log(err);
+										}else{
+											res.json(entry);
+										}
+									});
+
+								}
+							}
+						});
+					}
+				});
+			}else{
+				//if email is not formatted correctly
+				res.json({'status': 'fail - email formatting'});
+			}
+		}
+	});
+
+
+	//===PROJECT ROUTES===
+
+
+
+}; //end of module.export

@@ -13,5 +13,5 @@ let ProjectSchema = new Schema({
 	}]
 });
 
-let Article = mongoose.model('Project', ProjectSchema);
+let Project = mongoose.model('Project', ProjectSchema);
 module.exports = Project;
