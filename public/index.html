@@ -8,16 +8,25 @@
 
 	<link rel="stylesheet" href="./assets/css/reset.css">
 	<link rel="stylesheet" href="./assets/css/index.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
 	<header>
 		<div id="nav">
 			<a href="" class="btn" id="browse">Browse Public</a>
-			<a href="" class="btn">Login</a> or <a href="" class="btn">Register</a>
+			<a href="" class="btn" id="login">Login</a> or <a href="" class="btn" id="register">Register</a>
 			<div class="clear"></div>
 		</div>
 	</header>
+
+	<section id='loginPrompt'>
+		<form>
+            <input id='email' type="email" name="email" placeholder="email@account.com" required>
+            <input id='password' type="password" name="password" placeholder="password" required>
+            <a href="" id='submit' type="submit" class="btn">Submit</a>
+        </form>
+	</section>
 
 
 	<section id='banner'>
@@ -34,5 +43,6 @@
 		<p>Ne clita ocurreret quo. Dicam lucilius usu eu. Aeque ludus ut vim, vel ea euismod indoctum constituto, eu nec commodo prodesset dissentiet. Usu porro quodsi phaedrum ad, doctus nostrum te cum. Nec appareat laboramus eu, ei ius mundi pericula expetendis.</p>
 	</section>
 	
+	<script src="./assets/js/index.js"></script>
 </body>
 </html>
