@@ -37,9 +37,6 @@ describe( chalk.yellow('HTML Routes:'), function () {
 
 //===API Routes===
 describe(chalk.yellow('API Routes:'), function () {
-	afterEach(function () {
-		server.close();
-	});
 
 	it('responds to GET /api/user/foo@bar.com with 200', function(done) {
 		request(server)
