@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const chalk = require('chalk');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const session = require('express-session');
 
 
 //==Express Setup==
@@ -31,6 +32,18 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 //===Static Files, CSS,Images,Fonts===
 app.use(express.static('public'));
+
+
+//===Trust First Proxy===
+app.set('trust proxy', 1);
+
+//===SESSIONS===
+app.use(session({
+	secret: 'sandbox',
+	resave: false,
+	saveUninitialized: true
+	// cookie: { secure: true } //get https set for this
+}));
 
 
 //===MongoDB Connection with Mongoose==
