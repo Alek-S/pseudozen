@@ -14,22 +14,38 @@ module.exports = function(app) {
 	app.get('/api/user/:email', (req,res)=>{
 		let email = req.params.email;
 
+		//check if email param provided
 		if(!email){
 			res.json({'status': 'fail - missing email'});
 		}else{
-			User.findOne({'email': email}, (err,doc)=>{
-				if (err){
+			//check if user for email exists in database
+			User.count({email: email}, (err, count)=>{
+				if(err){
 					console.log(err);
-					res.json({'status': 'fail - Mongoose query'});
+					res.json({'status': 'fail - email count'});
 				}else{
-					res.json({
-						email: doc.email,
-						name: doc.name,
-					});
+					//if no user for email provided - fail reply
+					if(count < 1){
+						res.json({'status': 'fail - user not found'});
+					}else{
+						//look up user in db
+						User.findOne({'email': email}, (err,doc)=>{
+							if (err){
+								console.log(err);
+								res.json({'status': 'fail - Mongoose query'});
+							}else{
+								//reply with user email and name
+								res.json({
+									email: doc.email,
+									name: doc.name,
+								});
+							}
+						}); //end of User.findOne
+					}
 				}
-			});
+			}); //end of User.count
 		}
-	});
+	}); //end of /api/user/:email
 
 	//create new user
 	app.post('/api/user', (req,res)=>{
