@@ -41,15 +41,21 @@ describe(chalk.yellow('API Routes:'), function () {
 		server.close();
 	});
 
-	it('responds to GET api/user/foo@bar.com with 200', function(done) {
+	it('responds to GET /api/user/foo@bar.com with 200', function(done) {
 		request(server)
 			.get('/api/user/foo@bar.com')
 			.expect(200, done);
 	});
 
-	it('responds to GET api/user with 200', function(done) {
+	it('responds to GET /api/user with 200', function(done) {
 		request(server)
 			.post('/api/user')
+			.expect(200, done);
+	});
+
+	it('responds to GET /api/password with 200', function(done) {
+		request(server)
+			.post('/api/password')
 			.expect(200, done);
 	});
 

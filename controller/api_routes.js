@@ -20,9 +20,12 @@ module.exports = function(app) {
 			User.findOne({'email': email}, (err,doc)=>{
 				if (err){
 					console.log(err);
-					res.json({'status': 'fail'});
+					res.json({'status': 'fail - Mongoose query'});
 				}else{
-					res.json(doc);
+					res.json({
+						email: doc.email,
+						name: doc.name,
+					});
 				}
 			});
 		}
@@ -66,7 +69,7 @@ module.exports = function(app) {
 										if(err){
 											console.log(err);
 										}else{
-											res.json(entry);
+											res.json({'status': 'success'});
 										}
 									});
 
@@ -81,6 +84,53 @@ module.exports = function(app) {
 			}
 		}
 	});
+
+	//check password to confirm logged in for session
+	app.post('/api/password', (req,res)=>{
+		let email = req.body.email;
+		let passwordToCheck = req.body.password;
+		
+		//check if body elements sent in
+		if( !email || !passwordToCheck){
+			res.json({'status': 'fail - missing required body fields'});
+		}else{
+			//check if password if formatted correctly
+			if( !validator.isEmail(email) ){
+				res.json({'status': 'fail - email formatting'});
+			}else{
+				//if yes - get user email and passwordHash info from User mongo collection
+				User.findOne({'email': email}, (err,doc)=>{
+					if (err){
+						console.log(err);
+						res.json({'status': 'fail - Mongoose query'});
+					}else{
+						//TODO
+						//then bcrypt.compare() to see if password match
+						bcrypt.compare(passwordToCheck, doc.password, (err, result) => {
+							if(err){
+								console.log(err);
+								res.json({'status': 'fail - password hash compare'});
+							}else{
+								//if no - destroy session (req.session.destroy), return fail - session destroyed
+								if(!result){
+									res.json({status: 'fail - Password invalid'});
+									req.session.destroy;
+								}else{
+									//if yes - req.session.loggedin=true and set req.session.email req.session.name
+									req.session.loggedin = true;
+									req.session.email = doc.email;
+									req.session.name = doc.name;
+
+									console.log(req.session);
+									res.json({status: 'success - Password valid'});
+								}
+							}
+						}); //end of bcrypt.compare
+					}
+				}); //end of User.findOne
+			}
+		}
+	});//end of app.get password
 
 
 	//===PROJECT ROUTES===
