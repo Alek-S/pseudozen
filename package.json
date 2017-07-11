@@ -9,7 +9,9 @@
   "scripts": {
     "test": "mocha",
     "start": "node server.js",
-    "build": "webpack"
+    "build": "webpack",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -34,7 +36,8 @@
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "validator": "^8.0.0"
+    "validator": "^8.0.0",
+    "snyk": "^1.36.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -43,5 +46,6 @@
     "mocha": "^3.4.2",
     "supertest": "^3.0.0",
     "webpack": "^3.1.0"
-  }
+  },
+  "snyk": true
 }
