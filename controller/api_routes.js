@@ -138,7 +138,7 @@ module.exports = function(app) {
 									req.session.name = doc.name;
 
 									console.log(req.session);
-									res.json({status: 'success - Password valid'});
+									res.json({status: 'success'});
 								}
 							}
 						}); //end of bcrypt.compare
