@@ -1,3 +1,5 @@
+let webpack = require('webpack');
+
 module.exports = {
 
 	//entry point
@@ -23,7 +25,17 @@ module.exports = {
 			}
 		]
 	},
+	plugins: [
+		new webpack.DefinePlugin({ //<--key to reduce React's size
+			'process.env': {
+				'NODE_ENV': JSON.stringify('production')
+			}
+		}),
+		new webpack.optimize.UglifyJsPlugin(),
+		new webpack.optimize.AggressiveMergingPlugin(),
+	],
 	// This lets us debug our react code in chrome dev tools. Errors will have lines and file names
 	// Without this the console says all errors are coming from just coming from bundle.js
-	devtool: 'eval-source-map'
+	// devtool: 'eval-source-map'
+	devtool: 'cheap-source-map'
 };
