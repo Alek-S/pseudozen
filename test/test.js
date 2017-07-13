@@ -44,16 +44,22 @@ describe(chalk.yellow('API Routes:'), function () {
 			.expect(200, done);
 	});
 
-	it('responds to GET /api/user with 200', function(done) {
+	it('responds to POST /api/user with 200', function(done) {
 		request(server)
 			.post('/api/user')
 			.expect(200, done);
 	});
 
-	it('responds to GET /api/password with 200', function(done) {
+	it('responds to POST /api/password with 200', function(done) {
 		request(server)
 			.post('/api/password')
 			.expect(200, done);
+	});
+
+	it('responds to POST /api/logout with 302 redirect', function(done) {
+		request(server)
+			.post('/api/logout')
+			.expect(302, done);
 	});
 
 });

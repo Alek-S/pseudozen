@@ -47,6 +47,7 @@ module.exports = function(app) {
 		}
 	}); //end of /api/user/:email
 
+
 	//create new user
 	app.post('/api/user', (req,res)=>{
 		let email = req.body.email;
@@ -101,6 +102,7 @@ module.exports = function(app) {
 		}
 	});
 
+
 	//check password to confirm logged in for session
 	app.post('/api/password', (req,res)=>{
 		let email = req.body.email;
@@ -147,6 +149,18 @@ module.exports = function(app) {
 			}
 		}
 	});//end of app.get password
+
+
+	app.post('/api/logout', (req,res)=>{
+		req.session.destroy( (err)=>{
+			if(err){
+				console.log(err);
+			}
+			console.log(req.session);
+			res.redirect('/');
+		});
+	}); //end of logout
+
 
 
 	//===PROJECT ROUTES===
