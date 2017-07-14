@@ -3,12 +3,14 @@ import React from 'react';
 class Editor extends React.Component{
 	render(){
 		return(
-			<div>
+			<div id='main'>
 				<aside>
 					<p>sidebar</p>
 				</aside>
-			
-				<p>Editor goes here</p>
+
+				<div id="editor">
+					<p>Editor goes here</p>
+				</div>	
 			</div>
 
 		);
