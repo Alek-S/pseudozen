@@ -4,15 +4,16 @@ module.exports = function(app) {
 
 	//===HTML ROUTES===
 
-	app.get('/projects', (req,res)=>{
-		console.log(req.session);
+	app.get('/project', (req,res)=>{
 
-		console.log({ projectQuery: req.query.p });
+		if(req.query.p){
+			console.log({ projectQuery: req.query.p });
+		}
 
 		if(req.session.loggedIn && req.session.loggedIn === true){
+			console.log(req.session);
 			res.sendFile(path.join(__dirname, '../public/projects.html'));
 		}else{
-			//TODO
 			res.redirect('/');
 		}
 	});

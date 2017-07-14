@@ -14,7 +14,7 @@ $(document).ready(function(){
 		}, function(response){
 			console.log(response.status);
 			if(response.status === 'success'){
-				location.replace("/projects");
+				location.replace("/project");
 			}
 		});
 		
