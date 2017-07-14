@@ -6,6 +6,14 @@ module.exports = function(app) {
 
 	app.get('/projects', (req,res)=>{
 		console.log(req.session);
-		res.sendFile(path.join(__dirname, '../public/projects.html'));
+
+		console.log({ projectQuery: req.query.p });
+
+		if(req.session.loggedIn && req.session.loggedIn === true){
+			res.sendFile(path.join(__dirname, '../public/projects.html'));
+		}else{
+			//TODO
+			res.redirect('/');
+		}
 	});
 };

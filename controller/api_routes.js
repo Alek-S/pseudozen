@@ -122,7 +122,6 @@ module.exports = function(app) {
 						console.log(err);
 						res.json({'status': 'fail - Mongoose query'});
 					}else{
-						//TODO
 						//then bcrypt.compare() to see if password match
 						bcrypt.compare(passwordToCheck, doc.password, (err, result) => {
 							if(err){
@@ -134,8 +133,8 @@ module.exports = function(app) {
 									res.json({status: 'fail - Password invalid'});
 									req.session.destroy;
 								}else{
-									//if yes - req.session.loggedin=true and set req.session.email req.session.name
-									req.session.loggedin = true;
+									//if yes - req.session.loggedIn=true and set req.session.email req.session.name
+									req.session.loggedIn = true;
 									req.session.email = doc.email;
 									req.session.name = doc.name;
 
