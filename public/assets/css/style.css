@@ -6,12 +6,6 @@ header{
 	border-bottom: 1px solid #d9d9d9;
 }
 
-#newProject{
-	position: relative;
-	margin-left: 40px;
-	top: 40px;
-}
-
 aside{
 	position: absolute;
 	float: left;
@@ -37,7 +31,32 @@ aside{
 	box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.45);
 }
 
+#newProject{
+	position: relative;
+	display: inline;
+	margin-left: 3px;
+	border-radius: 0px 20px 20px 0px;
+}
+#nameInput{
+	display: inline;
+	background-color: #fff;
+	height: 30px;
+	width: 150px;
+	top: -1px;
+	border-radius: 5px 0px 0px 5px;
+}
+#nameError{
+	display:none;
+	background-color: #ff6666;
+	width: 175px;
+	padding: 5px;
+	margin-left: 20px;
+	border-radius: 5px;
+	font-size: .8em;
+	transition: 1s;
+}
 
+	
 /* SIDEBAR CATEGORIES*/
 .addImage{
 	position: relative;
