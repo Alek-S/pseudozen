@@ -15,6 +15,7 @@ let UserSchema = new Schema({
 	name: {
 		type: String,
 	},
+	projects : [{ type: Schema.Types.ObjectId, ref: 'Project' }]
 });
 
 let User = mongoose.model('User', UserSchema);

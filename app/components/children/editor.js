@@ -4,6 +4,16 @@ import Sidebar from './sidebar.js';
 import Viewer from './viewer.js';
 
 class Editor extends React.Component{
+	constructor(){
+		super();
+
+		this.state = {
+			projectName: undefined,
+			entried: [],
+			creator: undefined
+		};
+	}
+
 	render(){
 		return(
 			<div id='main'>

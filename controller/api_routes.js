@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const validator = require('validator');
-
+const chalk = require('chalk');
 //model
 const User = require('../model/User.js');
 const Project = require('../model/Project.js');
@@ -137,6 +137,7 @@ module.exports = function(app) {
 									req.session.loggedIn = true;
 									req.session.email = doc.email;
 									req.session.name = doc.name;
+									req.session._creator = doc._id;
 
 									// console.log(req.session);
 									res.json({status: 'success'});
@@ -167,13 +168,42 @@ module.exports = function(app) {
 	//create new project
 	app.post('/api/project', (req,res)=>{
 		let projectName = req.body.projectName;
-
-		if(!projectName){
-			res.json({'status': 'fail - missing required body fields'});
+		
+		//check if logged in
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
 		}else{
-			//TODO
-			console.log('creating new project with' + projectName);
-			res.json({'status': 'success'});
+			if(!projectName){
+				res.json({'status': 'fail - missing required body fields'});
+			}else{
+				console.log(chalk.yellow('Creating new project: ') + projectName);
+
+				//check if project name exists in database
+				Project.count({title: projectName}, (err, count)=>{
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - title count'});
+					}else{
+						//if already exists - reply with error
+						if(count > 0){
+							res.json({'status': 'fail - project name already taken'});
+						}else{
+							//Create project
+							Project.create({
+								title: projectName,
+								_creator: req.session._creator
+							},(err)=>{
+								if(err){
+									console.log(err);
+								}else{
+									res.json({'status': 'success'});
+								}
+							});
+
+						}
+					}
+				}); //end of User.count
+			}
 		}
 	});
 

@@ -15,7 +15,7 @@ class New extends React.Component{
 	_handleInput(event){
 		this.setState({
 			projectName: event.target.value
-		})
+		});
 	}
 
 
@@ -39,9 +39,9 @@ class New extends React.Component{
 		}else{
 			//post it to the project apt and then update href with query containing the project number
 			axios.post(window.location.origin + '/api/project', {projectName})
-			.then( (res)=>{
-				window.location.href += '?p=' + projectName;
-			});
+				.then( (res)=>{
+					window.location.href += '?p=' + projectName;
+				});
 		}
 
 	}
@@ -50,8 +50,8 @@ class New extends React.Component{
 	render(){
 		return(
 			<div id='newSection'>
-					<input id='nameInput' type="text" placeholder='Project Name' value={this.state.projectName} onChange={this._handleInput.bind(this)}/><a href="" className="btn" id='newProject' onClick={this._newProject.bind(this)}>Start New Project</a>
-					<div id='nameError'>{this.state.errorMsg}</div>
+				<input id='nameInput' type="text" placeholder='Project Name' value={this.state.projectName} onChange={this._handleInput.bind(this)}/><a href="" className="btn" id='newProject' onClick={this._newProject.bind(this)}>Start New Project</a>
+				<div id='nameError'>{this.state.errorMsg}</div>
 			</div>
 
 		);
