@@ -72,7 +72,7 @@ module.exports = function(app) {
 							if(err){
 								console.log(err);
 							}else{
-								console.log('count:', count);
+								// console.log('count:', count);
 								//if already in db - return already saved
 								if(count > 0){
 									res.json({'status': 'fail - user already saved'});
@@ -138,7 +138,7 @@ module.exports = function(app) {
 									req.session.email = doc.email;
 									req.session.name = doc.name;
 
-									console.log(req.session);
+									// console.log(req.session);
 									res.json({status: 'success'});
 								}
 							}
@@ -164,6 +164,17 @@ module.exports = function(app) {
 
 	//===PROJECT ROUTES===
 
+	//create new project
+	app.post('/api/project', (req,res)=>{
+		let projectName = req.body.projectName;
 
+		if(!projectName){
+			res.json({'status': 'fail - missing required body fields'});
+		}else{
+			//TODO
+			console.log('creating new project with' + projectName);
+			res.json({'status': 'success'});
+		}
+	});
 
 }; //end of module.export

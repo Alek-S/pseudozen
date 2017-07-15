@@ -69,4 +69,10 @@ describe(chalk.yellow('API Routes:'), function () {
 			.expect(302, done);
 	});
 
+	it('responds to POST /api/project', function(done) {
+		request(server)
+			.post('/api/project')
+			.expect(200, done);
+	});
+
 });
