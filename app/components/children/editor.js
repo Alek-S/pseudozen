@@ -1,15 +1,18 @@
 import React from 'react';
 
+import Sidebar from './sidebar.js';
+import Viewer from './viewer.js';
+
 class Editor extends React.Component{
 	render(){
 		return(
 			<div id='main'>
 				<aside>
-					<p>sidebar</p>
+					<Sidebar />
 				</aside>
 
-				<div id="editor">
-					<p>Editor goes here</p>
+				<div id="viewer">
+					<Viewer />
 				</div>	
 			</div>
 

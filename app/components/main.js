@@ -46,6 +46,7 @@ class Main extends React.Component{
 			<div>
 				<header>
 					<div id="nav">
+						<a href="/project" className="btn" id="back">back</a>
 						<a href="" className="btn" id="logout" onClick={this._handleLogout.bind(this) }>logout</a>
 					</div>
 				</header>
