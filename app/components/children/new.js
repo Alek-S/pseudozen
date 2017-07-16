@@ -32,7 +32,7 @@ class New extends React.Component{
 			});
 	}
 
-
+		// <a className='btnDelete' href='' onClick={this._deleteProject.bind({this: this, name: project.title})}>DELETE</a>
 	_populateProjects(){
 		let projects = this.state.projects;
 
@@ -40,10 +40,27 @@ class New extends React.Component{
 			return(
 				<a className='projectCard' key={index} href={'/project?p=' + project.title}>
 					<h2>{project.title}</h2>
+					<a className='btnDelete' href='' onClick={this._deleteProject.bind({fetch: this._fetchProjects.bind(this), name: project.title})}>
+						<img src="assets/images/trash.svg" height="15px" alt="trash"/>
+					</a>
 					<p>Created: {project.createdAt.slice(0,10)}</p>
 				</a>
 			);
 		});
+	}
+
+	_deleteProject(event){
+		event.preventDefault();
+
+		axios( {
+			method: 'delete',
+			url: window.location.origin + '/api/project', 
+			data: {projectName: this.name}
+		})
+			.then( (res)=>{
+				console.log(res.data);
+				this.fetch();
+			});
 	}
 
 

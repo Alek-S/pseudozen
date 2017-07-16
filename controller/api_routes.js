@@ -207,6 +207,37 @@ module.exports = function(app) {
 		}
 	});
 
+
+	//Delete Project
+	app.delete('/api/project', (req,res)=>{
+		let projectName = req.body.projectName;
+
+		//check if logged in
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+		}else{
+			//check if project name provided
+			if(!projectName){
+				res.json({'status': 'fail - missing projectName'});
+			}else{
+				console.log(chalk.red('Deleting project: ') + projectName);
+
+				Project.remove( {
+					title: projectName,
+					_creator: req.session._creator //is this their own project?
+				}, (err)=>{
+					if (err){
+						console.log(err);
+						res.json({'status': 'fail - delete error'});
+					}else{
+						res.json({'status': 'success'});
+					}
+				}); //end of Project.delete
+			}
+		}
+	}); //end of app.delete
+
+
 	//get user's projects
 	app.get('/api/project/user', (req,res)=>{
 		let user = req.session._creator;

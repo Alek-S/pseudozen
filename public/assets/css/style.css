@@ -86,7 +86,22 @@ aside{
 }
 .projectCard p{
 	font-size: .8em;
-}	
+}
+.btnDelete{
+	position: relative;
+	top: -23px;
+	float: right;
+	background-color: #f2f2f2;
+	padding: 3px;
+	padding-bottom: 0px;
+	border-radius: 4px;
+	transition: all .5s;
+}
+.btnDelete:hover{
+	background-color: #ff4d4d;
+}
+
+
 /* SIDEBAR CATEGORIES*/
 .addImage{
 	position: relative;
