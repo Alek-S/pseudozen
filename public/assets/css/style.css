@@ -56,7 +56,37 @@ aside{
 	transition: 1s;
 }
 
-	
+#existingProjects{
+	margin-top: 40px;
+	margin-left: 20px;
+}
+.projectCard{
+	display: inline-block;
+	padding: 10px;
+	margin: 25px;
+	background-color: #fff;
+	width: 250px;
+	height: 100px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 65px 0px rgba(0,0,0,0.35);
+	background: linear-gradient(to bottom, #499bea 0%, #207ce5 100%);
+	transition: all .5s ease; 
+}
+.projectCard:hover{
+	position: relative;
+	height: 120px;
+	background: linear-gradient(to bottom, #ffaf4b 0%, #ff920a 100%);
+	box-shadow: 0px 0px 65px 0px rgba(235,183,50,0.55);
+}
+.projectCard h2{
+	color: #fff;
+	font-size: 1em;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+.projectCard p{
+	font-size: .8em;
+}	
 /* SIDEBAR CATEGORIES*/
 .addImage{
 	position: relative;

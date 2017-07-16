@@ -14,6 +14,20 @@ class Editor extends React.Component{
 		};
 	}
 
+
+	//==Life Cycle==
+	componentWillMount(){
+	}
+	//====//
+
+
+
+	//==HANDLERS==
+	//====//
+
+
+
+	//==RENDER==
 	render(){
 		return(
 			<div id='main'>
@@ -28,7 +42,8 @@ class Editor extends React.Component{
 
 		);
 	}
-}
+	//====//
+}//end of Class
 
 
 export default Editor;

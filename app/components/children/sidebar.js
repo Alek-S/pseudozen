@@ -1,6 +1,16 @@
 import React from 'react';
 
 class Sidebar extends React.Component{
+	constructor(){
+		super();
+	}
+
+
+
+	//==HANDLERS==
+	//====//
+
+
 	render(){
 		return(
 			<div>
@@ -21,7 +31,7 @@ class Sidebar extends React.Component{
 
 
 				<div id="loopSection" className='asideCategory'>
-					<h2>Iteration</h2>
+					<h2>Control Flow & Iteration</h2>
 					<div className='type'><a href=''><img className='addImage' src="assets/images/add.svg" alt="add" height='15px'/> If</a></div>
 					<div className='type'><a href=''><img className='addImage' src="assets/images/add.svg" alt="add" height='15px'/> While</a></div>
 				</div>

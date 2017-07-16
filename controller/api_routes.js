@@ -207,4 +207,23 @@ module.exports = function(app) {
 		}
 	});
 
+	//get user's projects
+	app.get('/api/project/user', (req,res)=>{
+		let user = req.session._creator;
+
+		//check if logged in
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+		}else{
+			Project.find({_creator: user}, (err,docs)=>{
+				if(err){
+					console.log(err);
+					res.json({'status': 'fail - project find'});
+				}else{
+					res.json(docs);
+				}
+			});
+		}
+	});
+
 }; //end of module.export

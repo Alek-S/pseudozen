@@ -37,6 +37,7 @@ app.use(express.static('public'));
 //===Trust First Proxy===
 app.set('trust proxy', 1);
 
+
 //===SESSIONS===
 app.use(session({
 	secret: 'sandbox',

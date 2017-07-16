@@ -14,7 +14,9 @@ class Main extends React.Component{
 		};
 	}
 	
+
 	
+	//==HANDLERS==
 	_handleLogout(event){
 		event.preventDefault();
 
@@ -23,9 +25,11 @@ class Main extends React.Component{
 				window.location.replace(window.location.origin + '/');
 			});
 	}
+	//====//
 
 
 
+	//==RENDER==
 	render(){
 
 		let body = null;
@@ -51,6 +55,8 @@ class Main extends React.Component{
 			</div>
 		);
 	}
-}
+	//====//
+
+}//end of Class
 
 export default Main;

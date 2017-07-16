@@ -9,6 +9,10 @@ let ProjectSchema = new Schema({
 		type: String,
 		required: [true, 'Project title required']
 	},
+	createdAt: { 
+		type: Date, 
+		default: Date.now 
+	},
 	entry: [{
 		type: String
 	}]
