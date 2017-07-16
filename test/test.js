@@ -51,22 +51,22 @@ describe(chalk.yellow('API Routes:'), function () {
 			.expect(200, done);
 	});
 
-	it('responds to POST /api/user', function(done) {
+	it('responds to POST /api/user with {"status": "success"}', function(done) {
 		request(server)
 			.post('/api/user')
-			.expect(200, done);
+			.send({email: 'foobar@test.com', password:'testaccount'})
+			.expect(200, {
+				status: 'success'
+			},done);
 	});
 
-	it('responds to POST /api/password', function(done) {
+	it('responds to POST /api/password {"status": "success"}', function(done) {
 		request(server)
 			.post('/api/password')
-			.expect(200, done);
-	});
-
-	it('responds to POST /api/logout with redirect', function(done) {
-		request(server)
-			.post('/api/logout')
-			.expect(302, done);
+			.send({email: 'foobar@test.com', password:'testaccount'})
+			.expect(200, {
+				status: 'success'
+			},done);
 	});
 
 	it('responds to POST /api/project', function(done) {
@@ -75,10 +75,21 @@ describe(chalk.yellow('API Routes:'), function () {
 			.expect(200, done);
 	});
 
-	it('responds to POST /api/project/user', function(done) {
+	it('responds to DELETE /api/project', function(done) {
 		request(server)
-			.post('/api/project')
+			.del('/api/project')
 			.expect(200, done);
 	});
 
+	it('responds to GET /api/project/user', function(done) {
+		request(server)
+			.get('/api/project/user')
+			.expect(200, done);
+	});
+
+	it('responds to POST /api/logout with redirect', function(done) {
+		request(server)
+			.post('/api/logout')
+			.expect(302, done);
+	});
 });
