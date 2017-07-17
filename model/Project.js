@@ -13,9 +13,7 @@ let ProjectSchema = new Schema({
 		type: Date, 
 		default: Date.now 
 	},
-	entry: [{
-		type: String
-	}]
+	entry: []
 });
 
 let Project = mongoose.model('Project', ProjectSchema);

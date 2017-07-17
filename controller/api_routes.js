@@ -283,24 +283,37 @@ module.exports = function(app) {
 
 	//add entry to project
 	app.post('/api/project/entry', (req,res)=>{
-		let entry = req.body.entry;
-		let title = req.body.projectName;
+		let newEntry = req.body.newEntry;
+		let title = req.body.title;
 		let user = req.session._creator;
+
+		console.log(chalk.yellow('here', newEntry, title, user));
 
 		if(!req.session.loggedIn && req.session.loggedIn !== true){
 			res.json({'status': 'fail - not logged in'});
 		}else{
+			console.log(chalk.green('here'));
 			Project.update({
 				title: title,
 				_creator: user
 			},{
-				$push: {entry: entry}
-			},(err)=>{
+				$push: {
+					'entry':{
+						'category': newEntry.category,
+						'type': newEntry.type,
+						'forms': {}
+					}
+				},
+			},
+			{safe: true, upsert: true},
+			(err)=>{
 				if(err){
+					console.log(chalk.blue('here'));
 					console.log(err);
 					res.json({'status': 'fail - could not update'});
 				}else{
-					res.json({'status': 'fail - project find'});
+					console.log(chalk.red('here'));
+					res.json({'status': 'success'});
 				}
 			});
 		}
