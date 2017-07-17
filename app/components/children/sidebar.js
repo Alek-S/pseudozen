@@ -11,13 +11,11 @@ class Sidebar extends React.Component{
 	//==HANDLERS==
 	_handleClick(event){
 		event.preventDefault();
-		console.log('category:',this.category,'\ntype:', this.type);
 
-		console.log(location);
 		let entry = {
 			category: this.category,
 			type: this.type,
-			form: {} 
+			forms: formObj(this.type) 
 		};
 		
 		axios.post(window.location.origin + '/api/project/entry',{
@@ -26,6 +24,38 @@ class Sidebar extends React.Component{
 		}).then((response)=>{
 			console.log(response.data);
 		});
+
+		function formObj(type){
+			switch(type) {
+				
+				case 'initialize':
+					return {name:''};				
+
+				case 'set':
+					return {name:'', value:''};
+				
+				case 'add':
+				case 'subtract':
+				case 'multiply':
+				case 'divide':
+					return {firstVal:'', secondVal:''};
+
+				case 'if':
+					return {name:'', comparison:'', value:''};
+
+				case 'while':
+					return {name:'', comparison:''};
+
+				case 'read':
+				case 'write':
+					return {from:'', to:''};
+
+				case 'print':
+				case 'return':
+				case 'freeform':
+					return {value:''};
+			}
+		}
 	}
 	//====//
 
@@ -36,13 +66,13 @@ class Sidebar extends React.Component{
 				<div id="declareSection" className='asideCategory'>
 					<h2>Declaration</h2>
 
-					<a href='' onClick={this._handleClick.bind({this:this, category:'declare', type:'initialize'})}>
+					<a href='' onClick={this._handleClick.bind({category:'declare', type:'initialize'})}>
 						<div className='type'>
 							<img className='addImage' src="assets/images/add.svg" alt="add" height='15px'/> Initialize
 						</div>
 					</a>
 
-					<a href='' onClick={this._handleClick.bind({this:this, category:'declare', type:'set'})}>
+					<a href='' onClick={this._handleClick.bind({category:'declare', type:'set'})}>
 						<div className='type'>
 							<img className='addImage' id='set' src="assets/images/add.svg" alt="add" height='15px'/> Set
 						</div>
@@ -53,7 +83,7 @@ class Sidebar extends React.Component{
 				<div id="arithmaticSection" className='asideCategory'>
 					<h2>Arithmatic</h2>
 
-					<a href='' onClick={this._handleClick.bind({this:this, category:'arithmatic', type:'add'})}>
+					<a href='' onClick={this._handleClick.bind({category:'arithmatic', type:'add'})}>
 						<div className='type'>
 							<img className='addImage' src="assets/images/add.svg" alt="add" height='15px'/> Add
 						</div>

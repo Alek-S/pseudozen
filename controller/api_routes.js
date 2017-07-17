@@ -287,12 +287,9 @@ module.exports = function(app) {
 		let title = req.body.title;
 		let user = req.session._creator;
 
-		console.log(chalk.yellow('here', newEntry, title, user));
-
 		if(!req.session.loggedIn && req.session.loggedIn !== true){
 			res.json({'status': 'fail - not logged in'});
 		}else{
-			console.log(chalk.green('here'));
 			Project.update({
 				title: title,
 				_creator: user
@@ -301,18 +298,16 @@ module.exports = function(app) {
 					'entry':{
 						'category': newEntry.category,
 						'type': newEntry.type,
-						'forms': {}
+						'forms': newEntry.forms
 					}
 				},
 			},
 			{safe: true, upsert: true},
 			(err)=>{
 				if(err){
-					console.log(chalk.blue('here'));
 					console.log(err);
 					res.json({'status': 'fail - could not update'});
 				}else{
-					console.log(chalk.red('here'));
 					res.json({'status': 'success'});
 				}
 			});
