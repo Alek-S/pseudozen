@@ -37,7 +37,7 @@ class Main extends React.Component{
 		if (this.state.projectSelected === false && !location.search ){
 			body = <New />;
 		}else{
-			body = <Editor  project={location.search} />;
+			body = <Editor  project={location.search.slice(3)} />;
 		}
 
 		return(

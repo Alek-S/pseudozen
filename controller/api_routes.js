@@ -257,4 +257,25 @@ module.exports = function(app) {
 		}
 	});
 
+	//add entry to project
+	app.post('/api/project/entry', (req,res)=>{
+		let entry = req.body.entry;
+		let title = req.body.projectName;
+		let user = req.session._creator;
+
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+		}else{
+
+		}
+
+		//TODO
+	});
+
+	//update entry to project
+	app.put('/api/project/entry', (req,res)=>{
+		//TODO
+	});
+
+
 }; //end of module.export

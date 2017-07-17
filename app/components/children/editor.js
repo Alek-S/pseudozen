@@ -32,11 +32,11 @@ class Editor extends React.Component{
 		return(
 			<div id='main'>
 				<aside>
-					<Sidebar />
+					<Sidebar projectName={this.props.project}/>
 				</aside>
 
-				<div id="viewer">
-					<Viewer />
+				<div>
+					<Viewer projectName={this.props.project} />
 				</div>	
 			</div>
 

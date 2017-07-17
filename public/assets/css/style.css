@@ -16,7 +16,14 @@ aside{
 	border-right: 1px solid #d9d9d9;
 	padding: 10px;
 }
-
+#viewerTitle{
+	margin-left: 250px;
+	margin-top: 20px;
+}
+#viewerTitle H2{
+	font-size: 1.5em;
+	font-weight: 600;
+}
 #viewer{
 	margin-left: 250px;
 	margin-right: 20px;
