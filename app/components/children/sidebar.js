@@ -29,31 +29,31 @@ class Sidebar extends React.Component{
 			switch(type) {
 				
 				case 'initialize':
-					return {name:''};				
+					return {name:'', indent:0};				
 
 				case 'set':
-					return {name:'', value:''};
+					return {name:'', value:'', indent:0};
 				
 				case 'add':
 				case 'subtract':
 				case 'multiply':
 				case 'divide':
-					return {firstVal:'', secondVal:''};
+					return {firstVal:'', secondVal:'', indent:0};
 
 				case 'if':
-					return {name:'', comparison:'', value:''};
+					return {name:'', comparison:'', value:'', indent:0};
 
 				case 'while':
-					return {name:'', comparison:''};
+					return {name:'', comparison:'', indent:0};
 
 				case 'read':
 				case 'write':
-					return {from:'', to:''};
+					return {from:'', to:'', indent:0};
 
 				case 'print':
 				case 'return':
 				case 'freeform':
-					return {value:''};
+					return {value:'', indent:0};
 			}
 		}
 	}

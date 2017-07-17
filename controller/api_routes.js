@@ -7,9 +7,11 @@ const Project = require('../model/Project.js');
 
 
 module.exports = function(app) {
-
-	//===USER ROUTES===
 	
+	//=================
+	//===USER ROUTES===
+	//=================
+
 	//retrieve user
 	app.get('/api/user/:email', (req,res)=>{
 		let email = req.params.email;
@@ -163,7 +165,10 @@ module.exports = function(app) {
 
 
 
+
+	//====================
 	//===PROJECT ROUTES===
+	//====================
 
 	//create new project
 	app.post('/api/project', (req,res)=>{
@@ -198,14 +203,14 @@ module.exports = function(app) {
 								}else{
 									res.json({'status': 'success'});
 								}
-							});
+							}); //end of Project.create
 
 						}
 					}
 				}); //end of User.count
 			}
 		}
-	});
+	}); //end of app.post
 
 
 	//Delete Project
@@ -237,7 +242,6 @@ module.exports = function(app) {
 		}
 	}); //end of app.delete
 
-
 	//get user's projects
 	app.get('/api/project/user', (req,res)=>{
 		let user = req.session._creator;
@@ -253,9 +257,17 @@ module.exports = function(app) {
 				}else{
 					res.json(docs);
 				}
-			});
+			}); //end of Project.find
 		}
-	});
+	}); //end of app.get
+
+
+
+
+	//=======================
+	//====PROJECT ENTRIES====
+	//=======================
+
 
 	//get entries for project
 	app.get('/api/project/entry/:projectName', (req,res)=>{
@@ -287,9 +299,11 @@ module.exports = function(app) {
 		let title = req.body.title;
 		let user = req.session._creator;
 
+		//check if logged in
 		if(!req.session.loggedIn && req.session.loggedIn !== true){
 			res.json({'status': 'fail - not logged in'});
 		}else{
+			//update
 			Project.update({
 				title: title,
 				_creator: user
@@ -308,13 +322,12 @@ module.exports = function(app) {
 					console.log(err);
 					res.json({'status': 'fail - could not update'});
 				}else{
+					//confirm all is well
 					res.json({'status': 'success'});
 				}
-			});
+			}); //end of Project.update
 		}
-
-		//TODO
-	});
+	});//end of app.post
 
 	//update entry to project
 	app.put('/api/project/entry', (req,res)=>{

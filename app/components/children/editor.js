@@ -10,7 +10,7 @@ class Editor extends React.Component{
 
 		this.state = {
 			projectName: undefined,
-			entried: [],
+			entries: [],
 			creator: undefined,
 			timestamp: new Date().getTime()
 		};
