@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Sidebar from './sidebar.js';
 import Viewer from './viewer.js';
@@ -10,7 +11,8 @@ class Editor extends React.Component{
 		this.state = {
 			projectName: undefined,
 			entried: [],
-			creator: undefined
+			creator: undefined,
+			timestamp: new Date().getTime()
 		};
 	}
 
@@ -23,6 +25,11 @@ class Editor extends React.Component{
 
 
 	//==HANDLERS==
+	_handleKeyUp(){
+		this.setState({
+			timestamp: new Date().getTime()
+		});
+	}
 	//====//
 
 
@@ -31,12 +38,12 @@ class Editor extends React.Component{
 	render(){
 		return(
 			<div id='main'>
-				<aside>
+				<aside onClick={this._handleKeyUp.bind(this)}>
 					<Sidebar projectName={this.props.project}/>
 				</aside>
 
 				<div>
-					<Viewer projectName={this.props.project} />
+					<Viewer projectName={this.props.project} timestamp={this.state.timestamp}/>
 				</div>	
 			</div>
 
@@ -45,5 +52,11 @@ class Editor extends React.Component{
 	//====//
 }//end of Class
 
+
+
+//==PROP VALIDATION
+Editor.propTypes = {
+	project: PropTypes.string
+};
 
 export default Editor;

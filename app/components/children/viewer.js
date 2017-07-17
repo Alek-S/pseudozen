@@ -14,7 +14,6 @@ class Viewer extends React.Component{
 	}
 
 	render(){
-		console.log(this.props.projectName);
 		return(
 			<div>
 				<div id='viewerTitle'>
