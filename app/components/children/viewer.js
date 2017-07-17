@@ -5,10 +5,14 @@ class Viewer extends React.Component{
 		super();
 
 		this.state = {
-
+			entries: undefined
 		};
 	}
 	
+	_readEntries(){
+		//TODO: read entries from mongo
+	}
+
 	render(){
 		console.log(this.props.projectName);
 		return(
@@ -17,7 +21,7 @@ class Viewer extends React.Component{
 					<h2>{this.props.projectName}</h2>
 				</div>	
 				<div id="viewer">
-					<p>pseudocode snippets go here</p>
+					{this._readEntries.bind(this)}
 				</div>
 			</div>
 

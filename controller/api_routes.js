@@ -257,6 +257,30 @@ module.exports = function(app) {
 		}
 	});
 
+	//get entries for project
+	app.get('/api/project/entry/:projectName', (req,res)=>{
+		let title = req.params.projectName;
+		let user = req.session._creator;
+
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+		}else{
+			Project.find({
+				title: title,
+				_creator: user
+			})
+				.select('entry')
+				.exec( (err, docs)=>{
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - error finding entries'});
+					}else{
+						res.json(docs);
+					}
+				});
+		}
+	});
+
 	//add entry to project
 	app.post('/api/project/entry', (req,res)=>{
 		let entry = req.body.entry;
@@ -266,7 +290,19 @@ module.exports = function(app) {
 		if(!req.session.loggedIn && req.session.loggedIn !== true){
 			res.json({'status': 'fail - not logged in'});
 		}else{
-
+			Project.update({
+				title: title,
+				_creator: user
+			},{
+				$push: {entry: entry}
+			},(err)=>{
+				if(err){
+					console.log(err);
+					res.json({'status': 'fail - could not update'});
+				}else{
+					res.json({'status': 'fail - project find'});
+				}
+			});
 		}
 
 		//TODO
