@@ -362,9 +362,57 @@ module.exports = function(app) {
 					//confirm all is well
 					res.json({'status': 'success'});
 				}
-			});
+			}); //end of Project.update
 		}
 
+	}); //end of app.put
+
+
+	//delete an entry from project
+	app.delete('/api/project/entry', (req,res)=>{
+		let title = req.body.title;
+		let user = req.session._creator;
+		let index = req.body.index; //index of entry
+
+		let position = 'entry.' + index;
+
+		//check body fields provided
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+		}else{
+			//check if body fields provided
+			if(!title || !user){
+				res.json({'status': 'fail - missing body fields'});
+			}else{
+				//unset
+				Project.update({
+					'title': title,
+					'_creator': user
+				},{
+					$unset: { [position] : ''}
+				}, (err)=>{
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - unset'});
+					}else{
+						//clear out null entries
+						Project.update({
+							'title': title,
+							'_creator': user
+						},{
+							$pull: {'entry': null}
+						}, (err)=>{
+							if(err){
+								console.log(err);
+								res.json({'status': 'fail - pull null entries'});
+							}else{
+								res.json({'status': 'success'});
+							}
+						});//end of update
+					}
+				});//end of Project.update
+			}
+		}
 	});
 
 

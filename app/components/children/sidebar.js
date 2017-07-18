@@ -22,7 +22,7 @@ class Sidebar extends React.Component{
 			title: window.location.search.slice(3),
 			newEntry: entry
 		}).then((response)=>{
-			console.log(response.data);
+			// console.log(response.data);
 		});
 
 		function formObj(type){
@@ -168,7 +168,7 @@ class Sidebar extends React.Component{
 
 		);
 	}
-}
+} //end of render
 
 
 export default Sidebar;
