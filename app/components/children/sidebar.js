@@ -44,7 +44,7 @@ class Sidebar extends React.Component{
 					return {name:'', comparison:'', value:'', indent:0};
 
 				case 'while':
-					return {name:'', comparison:'', indent:0};
+					return {name:'', comparison:'', value:'', indent:0};
 
 				case 'read':
 				case 'write':
