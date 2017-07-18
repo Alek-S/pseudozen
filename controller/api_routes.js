@@ -335,8 +335,36 @@ module.exports = function(app) {
 		let user = req.session._creator;
 		let index = req.body.index; //index of entry
 		let formField = req.body.field;
+		let newValue = req.body.value;
+
+		let toSet = 'entry.' + index + '.forms.' + formField; 
 
 		//TODO
+
+		//check if logged in
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+		}else{
+			//update
+
+			Project.update({
+				'title': title,
+				'_creator': user
+			},{
+				$set: {
+					[toSet]:  newValue
+				}
+			}, (err)=>{
+				if(err){
+					console.log(err);
+					res.json({'status': 'fail - could not update'});
+				}else{
+					//confirm all is well
+					res.json({'status': 'success'});
+				}
+			});
+		}
+
 	});
 
 

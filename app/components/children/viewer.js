@@ -195,9 +195,17 @@ class Viewer extends React.Component{
 	}
 
 	_handleFormChange(event){
-		console.log(event.target.value);
-		console.log(this);
-		//TODO: api call to have it update in mongo
+		// console.log(event.target.value);
+		// console.log(this);
+
+		axios.put(window.location.origin + '/api/project/entry', {
+			title: window.location.search.slice(3),
+			index: this.index,
+			field: this.field,
+			value: event.target.value,
+		}).then((response)=>{
+			console.log(response);
+		});
 	}
 	//====//
 
