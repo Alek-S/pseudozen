@@ -331,6 +331,11 @@ module.exports = function(app) {
 
 	//update entry to project
 	app.put('/api/project/entry', (req,res)=>{
+		let title = req.body.title;
+		let user = req.session._creator;
+		let index = req.body.index; //index of entry
+		let formField = req.body.field;
+
 		//TODO
 	});
 
