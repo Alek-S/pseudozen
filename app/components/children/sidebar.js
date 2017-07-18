@@ -38,7 +38,7 @@ class Sidebar extends React.Component{
 				case 'subtract':
 				case 'multiply':
 				case 'divide':
-					return {firstVal:'', secondVal:'', indent:0};
+					return {firstVal:'', secondVal:'', assignee:'', indent:0};
 
 				case 'if':
 					return {name:'', comparison:'', value:'', indent:0};

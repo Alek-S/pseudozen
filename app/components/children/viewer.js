@@ -65,109 +65,113 @@ class Viewer extends React.Component{
 
 			case 'initialize':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Initialize 
-						<input defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} />
+						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} />
 					</div>
 				);
 
 			case 'set':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Set 
-						<input defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
+						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
 						equal to 
-						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='Value' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
 					</div>
 				);
 
 			case 'add':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Add
 						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
 						to 
 						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						and assign to
+						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} /> 
 					</div>
 				);
 
 			case 'subtract':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Subtract
 						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
 						from 
 						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						and assign to
+						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} /> 
 					</div>
 				);
 
 			case 'multiply':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Multiply
 						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
-						with 
+						by 
 						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						and assign to
+						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} /> 
 					</div>
 				);
 
 			case 'divide':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Divide
-						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
+						<input placeholder='Value' defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
 						by 
-						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						<input placeholder='Value' defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						and assign to
+						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} /> 
 					</div>
 				);
 
 			case 'if':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						If
-						<input defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
-						is
-						<input defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
-						than
-						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='First Comparison' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
+						<input placeholder='Condition' defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
+						<input placeholder='Second Comparison' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
 					</div>
 				);
 
 			case 'while':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						While
-						<input defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
-						is
-						<input defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
-						than
-						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='First Comparison' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
+						<input placeholder='Condition' defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
+						<input placeholder='Second Comparison' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
 					</div>
 				);
 
 			case 'read':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Read from
-						<input defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
+						<input placeholder='Source' defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
 						to
-						<input defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
+						<input placeholder='Destination' defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
 					</div>
 				);
 
 			case 'write':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Write from
-						<input defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
+						<input placeholder='Source' defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
 						to
-						<input defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
+						<input placeholder='Destination' defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
 					</div>
 				);
 
 			case 'print':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Print
 						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
 					</div>
@@ -175,7 +179,7 @@ class Viewer extends React.Component{
 
 			case 'return':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						Return
 						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
 					</div>
@@ -183,7 +187,7 @@ class Viewer extends React.Component{
 
 			case 'freeform':
 				return (
-					<div ClassName={currentEntry.category}>
+					<div className={currentEntry.category}>
 						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
 					</div>
 				);
