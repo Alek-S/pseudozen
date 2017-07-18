@@ -339,8 +339,6 @@ module.exports = function(app) {
 
 		let toSet = 'entry.' + index + '.forms.' + formField; 
 
-		//TODO
-
 		//check if logged in
 		if(!req.session.loggedIn && req.session.loggedIn !== true){
 			res.json({'status': 'fail - not logged in'});
@@ -381,7 +379,7 @@ module.exports = function(app) {
 			res.json({'status': 'fail - not logged in'});
 		}else{
 			//check if body fields provided
-			if(!title || !user){
+			if(!title){
 				res.json({'status': 'fail - missing body fields'});
 			}else{
 				//unset
@@ -413,7 +411,102 @@ module.exports = function(app) {
 				});//end of Project.update
 			}
 		}
-	});
+	});//end of app.delete
+
+
+	//move entry up or down
+	app.put('/api/project/position', (req, res)=>{
+		let title = req.body.title;
+		let user = req.session._creator;
+		let index = req.body.index; //index of entry
+		let direction = req.body.direction; // up = 1, down -1
+
+		let position = 'entry.' + index;
+		let newPosition = parseInt(index) + parseInt(direction);
+		console.log(chalk.blue(position, newPosition));
+		let currentEntry = getCurrentEntry();
+
+		//get current entry
+		function getCurrentEntry(){
+
+
+			Project.find({
+				'title': title,
+				'_creator': user
+			}).select('entry').exec( (err,docs)=>{
+				if(err){
+					console.log(err);
+					res.json({'status': 'fail - getting current entry'});
+				}else{
+					currentEntry =  docs[0].entry[index];
+					console.log(currentEntry);
+					updateOrder();
+				}
+			} );
+		}
+
+
+		function updateOrder(){
+			if(!req.session.loggedIn && req.session.loggedIn !== true){
+				res.json({'status': 'fail - not logged in'});
+			}else{
+				//check if body fields provided
+				if(!title || !direction){
+					console.log( title, index, direction);
+					res.json({'status': 'fail - missing body fields'});
+				}else{
+					//1. set the position to null
+					Project.update({
+						'title': title,
+						'_creator': user
+					},{
+						$unset: { [position] : ''}
+					}, (err)=>{
+						if(err){
+							console.log(err);
+							res.json({'status': 'fail - unset'});
+						}else{
+							//2. insert into new spot
+							Project.update({
+								'title': title,
+								'_creator': user
+							}, {
+								$push:{ 
+									entry: {
+										$each: [currentEntry],
+										$position: newPosition 
+									}
+								},
+							}, (err)=>{
+								if(err){
+									console.log(err);
+									res.json({'status': 'fail - position push'});
+								}else{
+									//3. clear out null entries
+									Project.update({
+										'title': title,
+										'_creator': user
+									},{
+										$pull: {'entry': null}
+									}, (err)=>{
+										if(err){
+											console.log(err);
+											res.json({'status': 'fail - pull null entries'});
+										}else{
+											res.json({'status': 'success'});
+										}
+									});//end of update
+								}
+							});//end of project.update new spot
+						}
+					});//end of Project.update unset
+
+				}
+			}
+		} //end of function
+
+	});//end of app.put
+
 
 
 }; //end of module.export

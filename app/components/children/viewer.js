@@ -68,9 +68,15 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category}>
 						Initialize 
 						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} />
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+
+						<a className='btnDeleteEntry' title='Delete Entry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+						
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -81,9 +87,15 @@ class Viewer extends React.Component{
 						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
 						equal to 
 						<input placeholder='Value' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -96,9 +108,15 @@ class Viewer extends React.Component{
 						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
 						and assign to
 						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
-						</a> 
+						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -111,9 +129,15 @@ class Viewer extends React.Component{
 						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
 						and assign to
 						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
-						</a> 
+						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -126,9 +150,15 @@ class Viewer extends React.Component{
 						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
 						and assign to
 						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a> 
+						
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -141,9 +171,15 @@ class Viewer extends React.Component{
 						<input placeholder='Value' defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
 						and assign to
 						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
-						</a> 
+						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div>  
 					</div>
 				);
 
@@ -154,9 +190,15 @@ class Viewer extends React.Component{
 						<input placeholder='First Comparison' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
 						<input placeholder='Condition' defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
 						<input placeholder='Second Comparison' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -167,9 +209,15 @@ class Viewer extends React.Component{
 						<input placeholder='First Comparison' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
 						<input placeholder='Condition' defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
 						<input placeholder='Second Comparison' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -180,9 +228,15 @@ class Viewer extends React.Component{
 						<input placeholder='Source' defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
 						to
 						<input placeholder='Destination' defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -193,9 +247,15 @@ class Viewer extends React.Component{
 						<input placeholder='Source' defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
 						to
 						<input placeholder='Destination' defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -204,9 +264,15 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category}>
 						Print
 						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a> 
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -215,9 +281,15 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category}>
 						Return
 						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 
@@ -225,9 +297,15 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category}>
 						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
+						
 						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
+
+						<div className='arrowSelection'>
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+						</div> 
 					</div>
 				);
 		}	
@@ -263,6 +341,32 @@ class Viewer extends React.Component{
 				// console.log(res.data);
 				this.fetch();
 			});
+	}
+
+
+	_moveUp(event){
+		event.preventDefault();
+
+		axios.put(window.location.origin + '/api/project/position', {
+			title: window.location.search.slice(3),
+			index: this.index,
+			direction: -1
+		}).then(()=>{
+			this.fetch();
+		});
+	}
+
+	_moveDown(event){
+		event.preventDefault();
+		console.log(1);
+		axios.put(window.location.origin + '/api/project/position', {
+			title: window.location.search.slice(3),
+			index: this.index,
+			direction: 2
+		}).then((response)=>{
+			console.log(response.data);
+			this.fetch();
+		});
 	}
 	//====//
 

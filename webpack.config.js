@@ -26,15 +26,18 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin({ //<--key to reduce React's size
+		new webpack.DefinePlugin({
 			'process.env': {
 				'NODE_ENV': JSON.stringify('production')
 			}
 		}),
 		new webpack.optimize.UglifyJsPlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
+		new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
+		new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000}),
+		new webpack.optimize.OccurrenceOrderPlugin()
+
 	],
-	// This lets us debug our react code in chrome dev tools. Errors will have lines and file names
-	// Without this the console says all errors are coming from just coming from bundle.js
+	//dev only
 	devtool: 'eval-source-map'
 };
