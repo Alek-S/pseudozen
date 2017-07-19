@@ -429,7 +429,6 @@ module.exports = function(app) {
 		//get current entry
 		function getCurrentEntry(){
 
-
 			Project.find({
 				'title': title,
 				'_creator': user
@@ -506,6 +505,73 @@ module.exports = function(app) {
 		} //end of function
 
 	});//end of app.put
+
+
+	//entry indent
+	app.put('/api/project/indentation', (req, res)=>{
+		let title = req.body.title;
+		let index = req.body.index; //index of entry
+		let direction = parseInt(req.body.direction); // +1 right, -1 left
+		let user = req.session._creator;
+		
+		let currentIndent = getCurrentIndent();
+		let position = 'entry.' + index + '.forms.indent';
+
+
+		//get current # of indents
+		function getCurrentIndent(){
+			//get current # of indents from mongo
+			//return it
+			Project.find({
+				'title': title,
+				// '_creator': user
+			}).select('entry').exec((err,docs)=>{
+				if(err){
+					console.log(err);
+					res.json({'status': 'fail - getting current entry'});
+				}else{
+					currentIndent = parseInt(docs[0].entry[index].forms.indent);
+					updateIndent();
+				}
+			});
+		}
+
+		function updateIndent(){
+			let newIndent = currentIndent + direction;
+			
+			//logged in?
+			if(!req.session.loggedIn && req.session.loggedIn !== true){
+				res.json({'status': 'fail - not logged in'});
+			}else{
+				//body fields provided?
+				if(!title || !direction || index === undefined){
+					res.json({'status': 'fail - missing body fields'});
+				}else{
+
+					//if new indent would be less than 0 or more than 3
+					if(newIndent < 0 || newIndent > 3){
+						// don't update, just respond
+						res.json({'status': 'fail - further indentation outside of allowable range'});
+					}else{
+						//all good, update indent
+						Project.update({
+							'title': title,
+							// '_creator': user
+						},{
+							[position]: newIndent
+						}, (err)=>{
+							if(err){
+								console.log(err);
+								res.json({'status': 'fail - update indent'});
+							}else{
+								res.json({'status': 'success'});
+							}
+						});//end of Project.update
+					}
+				}
+			}
+		} //end of updateIndent()
+	}); //end of app.put
 
 
 

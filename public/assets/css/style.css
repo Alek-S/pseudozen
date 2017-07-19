@@ -244,6 +244,7 @@ aside .type:hover{
 }
 .loop{
 	border-left: 15px solid #ff8566;
+	margin-top: 50px;
 }
 .io{
 	border-left: 15px solid #669999;
@@ -271,9 +272,32 @@ aside .type:hover{
 	padding-right: 15px;
 	border-right: 1px solid #999999;
 }
-.arrowSelection a{
+.indentSelection{
+	font-size: .95em;
+	position: relative;
+	display: inline;
+	margin-right: 0px;
+	padding-left: 5px;
+	 /* border-left: 1px solid #999999;   */
+}
+.arrowSelection a, .indentSelection a{
 	transition: .5s;
 }
-.arrowSelection a:hover{
+.arrowSelection a:hover, .indentSelection a:hover{
 	color: #ff4d4d;
+}
+.indent0{
+	transition: .3s;
+}
+.indent1{
+	margin-left:30px;
+	transition: .3s;
+}
+.indent2{
+	margin-left:60px;
+	transition: .3s;
+}
+.indent3{
+	margin-left:90px;
+	transition: .3s;
 }
