@@ -270,26 +270,30 @@ module.exports = function(app) {
 
 
 	//get entries for project
-	app.get('/api/project/entry/:projectName', (req,res)=>{
+	app.get('/api/project/entry/:projectName?', (req,res)=>{
 		let title = req.params.projectName;
 		let user = req.session._creator;
 
-		if(!req.session.loggedIn && req.session.loggedIn !== true){
-			res.json({'status': 'fail - not logged in'});
+		if(!title){
+			res.json({'status': 'fail - missing project name'});
 		}else{
-			Project.find({
-				title: title,
-				_creator: user
-			})
-				.select('entry')
-				.exec( (err, docs)=>{
-					if(err){
-						console.log(err);
-						res.json({'status': 'fail - error finding entries'});
-					}else{
-						res.json(docs);
-					}
-				});
+			if(!req.session.loggedIn && req.session.loggedIn !== true){
+				res.json({'status': 'fail - not logged in'});
+			}else{
+				Project.find({
+					title: title,
+					_creator: user
+				})
+					.select('entry')
+					.exec( (err, docs)=>{
+						if(err){
+							console.log(err);
+							res.json({'status': 'fail - error finding entries'});
+						}else{
+							res.json(docs);
+						}
+					});
+			}
 		}
 	});
 
@@ -375,40 +379,44 @@ module.exports = function(app) {
 		let position = 'entry.' + index;
 
 		//check body fields provided
-		if(!req.session.loggedIn && req.session.loggedIn !== true){
-			res.json({'status': 'fail - not logged in'});
+		if(!title || index === undefined){
+			res.json({'status': 'fail - missing body parameters'});
 		}else{
-			//check if body fields provided
-			if(!title){
-				res.json({'status': 'fail - missing body fields'});
+			if(!req.session.loggedIn && req.session.loggedIn !== true){
+				res.json({'status': 'fail - not logged in'});
 			}else{
-				//unset
-				Project.update({
-					'title': title,
-					'_creator': user
-				},{
-					$unset: { [position] : ''}
-				}, (err)=>{
-					if(err){
-						console.log(err);
-						res.json({'status': 'fail - unset'});
-					}else{
-						//clear out null entries
-						Project.update({
-							'title': title,
-							'_creator': user
-						},{
-							$pull: {'entry': null}
-						}, (err)=>{
-							if(err){
-								console.log(err);
-								res.json({'status': 'fail - pull null entries'});
-							}else{
-								res.json({'status': 'success'});
-							}
-						});//end of update
-					}
-				});//end of Project.update
+				//check if body fields provided
+				if(!title){
+					res.json({'status': 'fail - missing body fields'});
+				}else{
+					//unset
+					Project.update({
+						'title': title,
+						'_creator': user
+					},{
+						$unset: { [position] : ''}
+					}, (err)=>{
+						if(err){
+							console.log(err);
+							res.json({'status': 'fail - unset'});
+						}else{
+							//clear out null entries
+							Project.update({
+								'title': title,
+								'_creator': user
+							},{
+								$pull: {'entry': null}
+							}, (err)=>{
+								if(err){
+									console.log(err);
+									res.json({'status': 'fail - pull null entries'});
+								}else{
+									res.json({'status': 'success'});
+								}
+							});//end of update
+						}
+					});//end of Project.update
+				}
 			}
 		}
 	});//end of app.delete
@@ -421,14 +429,18 @@ module.exports = function(app) {
 		let index = req.body.index; //index of entry
 		let direction = req.body.direction; // up = 1, down -1
 
+		if(!title || !direction || index === undefined){
+			res.json({'status': 'fail - missing body parameters'});
+		}
+
 		let position = 'entry.' + index;
 		let newPosition = parseInt(index) + parseInt(direction);
-		console.log(chalk.blue(position, newPosition));
 		let currentEntry = getCurrentEntry();
+
 
 		//get current entry
 		function getCurrentEntry(){
-
+			
 			Project.find({
 				'title': title,
 				'_creator': user
@@ -438,7 +450,6 @@ module.exports = function(app) {
 					res.json({'status': 'fail - getting current entry'});
 				}else{
 					currentEntry =  docs[0].entry[index];
-					console.log(currentEntry);
 					updateOrder();
 				}
 			} );
@@ -449,58 +460,53 @@ module.exports = function(app) {
 			if(!req.session.loggedIn && req.session.loggedIn !== true){
 				res.json({'status': 'fail - not logged in'});
 			}else{
-				//check if body fields provided
-				if(!title || !direction){
-					console.log( title, index, direction);
-					res.json({'status': 'fail - missing body fields'});
-				}else{
-					//1. set the position to null
-					Project.update({
-						'title': title,
-						'_creator': user
-					},{
-						$unset: { [position] : ''}
-					}, (err)=>{
-						if(err){
-							console.log(err);
-							res.json({'status': 'fail - unset'});
-						}else{
-							//2. insert into new spot
-							Project.update({
-								'title': title,
-								'_creator': user
-							}, {
-								$push:{ 
-									entry: {
-										$each: [currentEntry],
-										$position: newPosition 
-									}
-								},
-							}, (err)=>{
-								if(err){
-									console.log(err);
-									res.json({'status': 'fail - position push'});
-								}else{
-									//3. clear out null entries
-									Project.update({
-										'title': title,
-										'_creator': user
-									},{
-										$pull: {'entry': null}
-									}, (err)=>{
-										if(err){
-											console.log(err);
-											res.json({'status': 'fail - pull null entries'});
-										}else{
-											res.json({'status': 'success'});
-										}
-									});//end of update
-								}
-							});//end of project.update new spot
-						}
-					});//end of Project.update unset
 
-				}
+				//1. set the position to null
+				Project.update({
+					'title': title,
+					'_creator': user
+				},{
+					$unset: { [position] : ''}
+				}, (err)=>{
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - unset'});
+					}else{
+						//2. insert into new spot
+						Project.update({
+							'title': title,
+							'_creator': user
+						}, {
+							$push:{ 
+								entry: {
+									$each: [currentEntry],
+									$position: newPosition 
+								}
+							},
+						}, (err)=>{
+							if(err){
+								console.log(err);
+								res.json({'status': 'fail - position push'});
+							}else{
+								//3. clear out null entries
+								Project.update({
+									'title': title,
+									'_creator': user
+								},{
+									$pull: {'entry': null}
+								}, (err)=>{
+									if(err){
+										console.log(err);
+										res.json({'status': 'fail - pull null entries'});
+									}else{
+										res.json({'status': 'success'});
+									}
+								});//end of update
+							}
+						});//end of project.update new spot
+					}
+				});//end of Project.update unset
+		
 			}
 		} //end of function
 
@@ -514,6 +520,10 @@ module.exports = function(app) {
 		let direction = parseInt(req.body.direction); // +1 right, -1 left
 		let user = req.session._creator;
 		
+		if(!title || !direction || index === undefined){
+			res.json({'status': 'fail - missing body fields'});
+		}
+
 		let currentIndent = getCurrentIndent();
 		let position = 'entry.' + index + '.forms.indent';
 

@@ -11,7 +11,6 @@ module.exports = function(app) {
 		}
 
 		if(req.session.loggedIn && req.session.loggedIn === true){
-			console.log(req.session);
 			res.sendFile(path.join(__dirname, '../public/projects.html'));
 		}else{
 			res.redirect('/');
