@@ -472,6 +472,7 @@ module.exports = function(app) {
 						console.log(err);
 						res.json({'status': 'fail - unset'});
 					}else{
+					
 						//2. insert into new spot
 						Project.update({
 							'title': title,

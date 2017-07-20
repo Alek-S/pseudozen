@@ -32,25 +32,22 @@ class Viewer extends React.Component{
 	//==HANDLERS==
 	_readEntries(){
 		//read entries from mongo
+		console.log(1);
 		axios.get(window.location.origin + '/api/project/entry/'+ this.props.projectName)
 			.then((response)=>{
 				//then set the state to entries returned
 				this.setState({
 					entries: response.data[0].entry
 				});
+
 			});
 	}
 
 
 	_renderEntries(){
 		let entries = this.state.entries;
-		let toReturn = null;
 		
-
 		return entries.map((entry, index)=>{
-			// return (
-			// 	<div key={index}>{entry.type}</div>
-			// );
 			return (
 				<div key={index}>{this._buildEntry(index)}</div>
 			);
@@ -68,7 +65,7 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Initialize 
 
-						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} />
 						
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -90,9 +87,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Set 
-						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
+						<input placeholder='Variable' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
 						equal to 
-						<input placeholder='being assigned' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='being assigned' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -114,11 +111,11 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Add
-						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
 						to 
-						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee'})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -140,11 +137,11 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Subtract
-						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
 						from 
-						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -166,11 +163,11 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Multiply
-						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
 						by 
-						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee'})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -192,11 +189,11 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Divide
-						<input defaultValue={this.state.entries[index].forms.firstVal} onBlur={this._handleFormChange.bind({index:index, field: 'firstVal'})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
 						by 
-						<input defaultValue={this.state.entries[index].forms.secondVal} onBlur={this._handleFormChange.bind({index:index, field: 'secondVal'})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' defaultValue={this.state.entries[index].forms.assignee} onBlur={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee'})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -218,9 +215,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						If
-						<input placeholder='First' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
-						<input placeholder='Condition' defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
-						<input placeholder='Second' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
+						<input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value'})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -242,9 +239,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						While
-						<input placeholder='First' defaultValue={this.state.entries[index].forms.name} onBlur={this._handleFormChange.bind({index:index, field: 'name'})} /> 
-						<input placeholder='Condition' defaultValue={this.state.entries[index].forms.comparison} onBlur={this._handleFormChange.bind({index:index, field: 'comparison'})} />
-						<input placeholder='Second' defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
+						<input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -266,9 +263,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Read from
-						<input placeholder='Source' defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
+						<input placeholder='Source' value={this.state.entries[index].forms.from} onChange={this._handleFormChange.bind({index:index, field: 'from', fetch: this._readEntries.bind(this)})} /> 
 						to
-						<input placeholder='Destination' defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
+						<input placeholder='Destination' value={this.state.entries[index].forms.to} onChange={this._handleFormChange.bind({index:index, field: 'to', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -290,9 +287,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Write from
-						<input placeholder='Source' defaultValue={this.state.entries[index].forms.from} onBlur={this._handleFormChange.bind({index:index, field: 'from'})} /> 
+						<input placeholder='Source' value={this.state.entries[index].forms.from} onChange={this._handleFormChange.bind({index:index, field: 'from', fetch: this._readEntries.bind(this)})} /> 
 						to
-						<input placeholder='Destination' defaultValue={this.state.entries[index].forms.to} onBlur={this._handleFormChange.bind({index:index, field: 'to'})} />
+						<input placeholder='Destination' value={this.state.entries[index].forms.to} onChange={this._handleFormChange.bind({index:index, field: 'to', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -314,7 +311,7 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Print
-						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -336,7 +333,7 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Return
-						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
+						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} /> 
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -357,7 +354,7 @@ class Viewer extends React.Component{
 			case 'freeform':
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
-						<input defaultValue={this.state.entries[index].forms.value} onBlur={this._handleFormChange.bind({index:index, field: 'value'})} /> 
+						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} /> 
 						
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -388,6 +385,7 @@ class Viewer extends React.Component{
 			value: event.target.value,
 		}).then((response)=>{
 			// console.log(response);
+			this.fetch();
 		});
 	}
 	
@@ -429,8 +427,7 @@ class Viewer extends React.Component{
 			title: window.location.search.slice(3),
 			index: this.index,
 			direction: 2
-		}).then((response)=>{
-			console.log(response.data);
+		}).then((response)=>{;
 			this.fetch();
 		});
 	}
