@@ -10,7 +10,10 @@ class Viewer extends React.Component{
 		this.state = {
 			entries: [],
 			editSelect: 'active',
-			textSelect: 'notActive'
+			textSelect: 'notActive',
+			plainText: 'active',
+			js: 'notActive',
+			python: 'notActive'
 		};
 
 		this._renderEntries = this._renderEntries.bind(this);
@@ -54,9 +57,18 @@ class Viewer extends React.Component{
 				);
 			});
 		}else{
+			let selectedLanguage = '';
+			
+			if( this.state.js === 'active'){
+				selectedLanguage = 'jsComments';
+			}
+			if( this.state.python === 'active'){
+				selectedLanguage = 'pythonComments';
+			}
+
 			return entries.map((entry, index)=>{
 				return (
-					<div key={index}>{this._buildText(index)}</div>
+					<div className={selectedLanguage} key={index}>{this._buildText(index)}</div>
 				);
 			});
 		}
@@ -387,6 +399,14 @@ class Viewer extends React.Component{
 	_buildText(index){
 		let currentEntry = this.state.entries[index];
 		let numberOfTabs = parseInt(currentEntry.forms.indent);
+		let commentMark = '';
+
+		if(this.state.js === 'active'){
+			commentMark = '// ';
+		}
+		if(this.state.python === 'active'){
+			commentMark = '# ';
+		}
 
 		function returnTabs(total){
 			let toReturn;
@@ -399,7 +419,7 @@ class Viewer extends React.Component{
 					toReturn += '\t';
 				}
 			}
-			
+
 			return <span>{toReturn}</span>;
 		}
 
@@ -407,67 +427,67 @@ class Viewer extends React.Component{
 
 			case 'initialize':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Initialize {currentEntry.forms.name}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Initialize {currentEntry.forms.name}</pre>
 				);
 
 			case 'set':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Set {currentEntry.forms.name} equal to {currentEntry.forms.value}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Set {currentEntry.forms.name} equal to {currentEntry.forms.value}</pre>
 				);
 
 			case 'add':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Add {currentEntry.forms.firstVal} to {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Add {currentEntry.forms.firstVal} to {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
 				);
 
 			case 'subtract':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Subtract {currentEntry.forms.firstVal} from {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Subtract {currentEntry.forms.firstVal} from {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
 				);
 
 			case 'multiply':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Multiply {currentEntry.forms.firstVal} by {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Multiply {currentEntry.forms.firstVal} by {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
 				);
 
 			case 'divide':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Divide {currentEntry.forms.firstVal} by {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Divide {currentEntry.forms.firstVal} by {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
 				);
 
 			case 'if':
 				return (
-					<pre>{returnTabs(numberOfTabs)}If {currentEntry.forms.name} {currentEntry.forms.comparison} {currentEntry.forms.value}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}If {currentEntry.forms.name} {currentEntry.forms.comparison} {currentEntry.forms.value}</pre>
 				);
 
 			case 'while':
 				return (
-					<pre>{returnTabs(numberOfTabs)}While {currentEntry.forms.name} {currentEntry.forms.comparison} {currentEntry.forms.value}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}While {currentEntry.forms.name} {currentEntry.forms.comparison} {currentEntry.forms.value}</pre>
 				);
 
 			case 'read':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Read from {currentEntry.forms.from} to {currentEntry.forms.to}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Read from {currentEntry.forms.from} to {currentEntry.forms.to}</pre>
 				);
 
 			case 'write':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Write from {currentEntry.forms.from} to {currentEntry.forms.to}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Write from {currentEntry.forms.from} to {currentEntry.forms.to}</pre>
 				);
 
 			case 'print':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Print {currentEntry.forms.value}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Print {currentEntry.forms.value}</pre>
 				);
 
 			case 'return':
 				return (
-					<pre>{returnTabs(numberOfTabs)}Return {currentEntry.forms.value}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}Return {currentEntry.forms.value}</pre>
 				);
 
 			case 'freeform':
 				return (
-					<pre>{returnTabs(numberOfTabs)}{currentEntry.forms.value}</pre>
+					<pre>{returnTabs(numberOfTabs)}{commentMark}{currentEntry.forms.value}</pre>
 				);
 		}
 	}
@@ -550,7 +570,6 @@ class Viewer extends React.Component{
 	_indentRight(event){
 		event.preventDefault();
 
-		//TODO: axios
 		axios.put(window.location.origin + '/api/project/indentation', {
 			title: window.location.search.slice(3),
 			index: this.index,
@@ -579,11 +598,54 @@ class Viewer extends React.Component{
 			textSelect: 'active'
 		});
 	}
+
+	_selectPlainText(event){
+		event.preventDefault();
+
+		this.setState({
+			plainText: 'active',
+			js: 'notActive',
+			python: 'notActive'
+		});
+	}
+	
+	_selectJS(event){
+		event.preventDefault();
+
+		this.setState({
+			plainText: 'notActive',
+			js: 'active',
+			python: 'notActive'
+		});
+	}
+
+	_selectPython(event){
+		event.preventDefault();
+
+		this.setState({
+			plainText: 'notActive',
+			js: 'notActive',
+			python: 'active'
+		});
+	}
 	//====//
 
 
 	render(){
+		
+		let languageSelect = '';
+
+		if(this.state.textSelect === 'active'){
+			languageSelect =
+				<div className='languageSelect'>
+					<a className={this.state.plainText} onClick={this._selectPlainText.bind(this)} id='plainText' href=''>Plain Text</a>
+					<a className={this.state.js} onClick={this._selectJS.bind(this)} id='js' href=''>JS/Go/C/Java</a>
+					<a className={this.state.python} onClick={this._selectPython.bind(this)} id='python' href=''>Python/Ruby</a>
+				</div>;
+		}
+
 		return(
+
 			<div>
 				<div id='viewerTitle'>
 					<h2>Project: <span id='projectTitle'> {this.props.projectName}</span> </h2>
@@ -591,6 +653,7 @@ class Viewer extends React.Component{
 					<div id='selectViewer'>
 						<a className={this.state.editSelect} id="editSelect" onClick={this._selectEdit.bind(this)} href="">Edit Entries</a>
 						<a className={this.state.textSelect} id="textSelect" onClick={this._selectText.bind(this)} href="">Export Text</a>
+						{languageSelect}
 					</div>
 				</div>
 

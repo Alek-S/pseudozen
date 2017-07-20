@@ -39,5 +39,5 @@ module.exports = {
 
 	],
 	//dev only
-	devtool: 'eval-source-map'
+	// devtool: 'eval-source-map'
 };
