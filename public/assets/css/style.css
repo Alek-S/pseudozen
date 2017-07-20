@@ -214,7 +214,7 @@ aside .type:hover{
 	margin-top: 30px;
 	margin-bottom: 40px;
 }
-#editSelect, #projectView{
+#editSelect, #textSelect{
 	padding: 7px;
 	font-size: .8em;
 }
@@ -222,7 +222,7 @@ aside .type:hover{
 	border-radius: 15px 2px 2px 15px;
 	margin-right: 0px;
 }
-#projectView{
+#textSelect{
 	border-radius: 2px 15px 15px 2px;
 	margin-left: 0px;
 }

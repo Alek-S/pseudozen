@@ -9,7 +9,8 @@ class Viewer extends React.Component{
 
 		this.state = {
 			entries: [],
-			viewSelect: 'edit'
+			editSelect: 'active',
+			textSelect: 'notActive'
 		};
 
 		this._renderEntries = this._renderEntries.bind(this);
@@ -32,7 +33,6 @@ class Viewer extends React.Component{
 	//==HANDLERS==
 	_readEntries(){
 		//read entries from mongo
-		console.log(1);
 		axios.get(window.location.origin + '/api/project/entry/'+ this.props.projectName)
 			.then((response)=>{
 				//then set the state to entries returned
@@ -47,13 +47,22 @@ class Viewer extends React.Component{
 	_renderEntries(){
 		let entries = this.state.entries;
 		
-		return entries.map((entry, index)=>{
-			return (
-				<div key={index}>{this._buildEntry(index)}</div>
-			);
-		});
+		if(this.state.editSelect === 'active'){
+			return entries.map((entry, index)=>{
+				return (
+					<div key={index}>{this._buildEntry(index)}</div>
+				);
+			});
+		}else{
+			return entries.map((entry, index)=>{
+				return (
+					<div key={index}>{this._buildText(index)}</div>
+				);
+			});
+		}
 	}
 
+	//returns entry divs when in edit mode
 	_buildEntry(index, event){
 		let currentEntry = this.state.entries[index];
 
@@ -374,6 +383,95 @@ class Viewer extends React.Component{
 		}	
 	}
 
+	//returns text divs when in text export mode
+	_buildText(index){
+		let currentEntry = this.state.entries[index];
+		let numberOfTabs = parseInt(currentEntry.forms.indent);
+
+		function returnTabs(total){
+			let toReturn;
+			console.log(total);
+
+			for(let i = 0; i <= total; ++i){
+				if(i < 1){
+					toReturn = '';
+				}else{
+					toReturn += '\t';
+				}
+			}
+			
+			return <span>{toReturn}</span>;
+		}
+
+		switch(currentEntry.type){
+
+			case 'initialize':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Initialize {currentEntry.forms.name}</pre>
+				);
+
+			case 'set':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Set {currentEntry.forms.name} equal to {currentEntry.forms.value}</pre>
+				);
+
+			case 'add':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Add {currentEntry.forms.firstVal} to {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+				);
+
+			case 'subtract':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Subtract {currentEntry.forms.firstVal} from {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+				);
+
+			case 'multiply':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Multiply {currentEntry.forms.firstVal} by {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+				);
+
+			case 'divide':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Divide {currentEntry.forms.firstVal} by {currentEntry.forms.secondVal} and assign to {currentEntry.forms.assignee}</pre>
+				);
+
+			case 'if':
+				return (
+					<pre>{returnTabs(numberOfTabs)}If {currentEntry.forms.name} {currentEntry.forms.comparison} {currentEntry.forms.value}</pre>
+				);
+
+			case 'while':
+				return (
+					<pre>{returnTabs(numberOfTabs)}While {currentEntry.forms.name} {currentEntry.forms.comparison} {currentEntry.forms.value}</pre>
+				);
+
+			case 'read':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Read from {currentEntry.forms.from} to {currentEntry.forms.to}</pre>
+				);
+
+			case 'write':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Write from {currentEntry.forms.from} to {currentEntry.forms.to}</pre>
+				);
+
+			case 'print':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Print {currentEntry.forms.value}</pre>
+				);
+
+			case 'return':
+				return (
+					<pre>{returnTabs(numberOfTabs)}Return {currentEntry.forms.value}</pre>
+				);
+
+			case 'freeform':
+				return (
+					<pre>{returnTabs(numberOfTabs)}{currentEntry.forms.value}</pre>
+				);
+		}
+	}
+
 	_handleFormChange(event){
 		// console.log(event.target.value);
 		// console.log(this);
@@ -389,7 +487,7 @@ class Viewer extends React.Component{
 		});
 	}
 	
-
+	//remove entry from project
 	_deleteEntry(event){
 		event.preventDefault();
 
@@ -407,7 +505,7 @@ class Viewer extends React.Component{
 			});
 	}
 
-
+	//move entry up
 	_moveUp(event){
 		event.preventDefault();
 
@@ -420,9 +518,10 @@ class Viewer extends React.Component{
 		});
 	}
 
+	//move entry down
 	_moveDown(event){
 		event.preventDefault();
-		console.log(1);
+
 		axios.put(window.location.origin + '/api/project/position', {
 			title: window.location.search.slice(3),
 			index: this.index,
@@ -432,6 +531,7 @@ class Viewer extends React.Component{
 		});
 	}
 
+	//indent entry left
 	_indentLeft(event){
 		event.preventDefault();
 
@@ -446,6 +546,7 @@ class Viewer extends React.Component{
 		});
 	}
 
+	//indent entry right -- number of indents limited to 3 for UI reasonss
 	_indentRight(event){
 		event.preventDefault();
 
@@ -458,6 +559,26 @@ class Viewer extends React.Component{
 			this.fetch();
 		});
 	}
+
+	//select edit view -- default when first loaded
+	_selectEdit(event){
+		event.preventDefault();
+
+		this.setState({
+			editSelect: 'active',
+			textSelect: 'notActive'
+		});
+	}
+
+	//select text view to export
+	_selectText(event){
+		event.preventDefault();
+		
+		this.setState({
+			editSelect: 'notActive',
+			textSelect: 'active'
+		});
+	}
 	//====//
 
 
@@ -468,7 +589,8 @@ class Viewer extends React.Component{
 					<h2>Project: <span id='projectTitle'> {this.props.projectName}</span> </h2>
 
 					<div id='selectViewer'>
-						<a className="active" id="editSelect" href="#">Edit Entries</a><a className="notActive"id="projectView" href="#">Export Text</a>
+						<a className={this.state.editSelect} id="editSelect" onClick={this._selectEdit.bind(this)} href="">Edit Entries</a>
+						<a className={this.state.textSelect} id="textSelect" onClick={this._selectText.bind(this)} href="">Export Text</a>
 					</div>
 				</div>
 
