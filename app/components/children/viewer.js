@@ -9,7 +9,7 @@ class Viewer extends React.Component{
 
 		this.state = {
 			entries: [],
-			value: 'blah'
+			viewSelect: 'edit'
 		};
 
 		this._renderEntries = this._renderEntries.bind(this);
@@ -115,7 +115,7 @@ class Viewer extends React.Component{
 						to 
 						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this) })} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -167,7 +167,7 @@ class Viewer extends React.Component{
 						by 
 						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -193,7 +193,7 @@ class Viewer extends React.Component{
 						by 
 						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee'})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -217,7 +217,7 @@ class Viewer extends React.Component{
 						If
 						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
 						<input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} />
-						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value'})} />
+						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this) })} />
 
 						<div className='indentSelection'>
 							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
@@ -465,8 +465,14 @@ class Viewer extends React.Component{
 		return(
 			<div>
 				<div id='viewerTitle'>
-					<h2>{this.props.projectName}</h2>
-				</div>	
+					<h2>Project: <span id='projectTitle'> {this.props.projectName}</span> </h2>
+
+					<div id='selectViewer'>
+						<a className="active" id="editSelect" href="#">Edit Entries</a><a className="notActive"id="projectView" href="#">Export Text</a>
+					</div>
+				</div>
+
+
 				<div id="viewer">
 					{this._renderEntries()}
 				</div>

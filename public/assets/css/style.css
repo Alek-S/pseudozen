@@ -200,6 +200,54 @@ aside .type:hover{
 	background-color: #8585ad;
 }
 
+#projectTitle{
+	font-weight: 400;
+}
+
+
+/* SELECT VIEWER */
+#selectViewer{
+	position: relative;
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 40px;
+}
+#editSelect, #projectView{
+	padding: 7px;
+	font-size: .8em;
+}
+#editSelect{
+	border-radius: 15px 2px 2px 15px;
+	margin-right: 0px;
+}
+#projectView{
+	border-radius: 2px 15px 15px 2px;
+	margin-left: 0px;
+}
+.notActive{
+	outline: none;
+	border:none;
+	background-color: #dfdfdf;
+}
+.notActive:hover{
+	color: #ffffff;
+	background-color: #cccccc;
+}
+.active{
+	outline: none;
+	background: linear-gradient(#72b6f9,#3999f9);
+	color: #ffffff;
+	border:none;
+}
+#selectViewer a.active{
+	color: #fff;
+}
+#selectViewer a.notActive:hover{
+	color: #fff;
+}
+
 
 
 /* ENTRY STYLES */
