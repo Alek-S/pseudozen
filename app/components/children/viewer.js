@@ -667,8 +667,22 @@ class Viewer extends React.Component{
 		});
 	}
 
-	_changeStatus(){
-		//TODO: update public private in mongo
+	_changeStatus(event){
+		event.preventDefault();
+		let newStatus;
+
+		if(event.target.value === 'Private'){
+			newStatus = false;
+		}else{
+			newStatus = true;
+		}
+
+		axios.put(window.location.origin + '/api/project/status/' + this.props.projectName, {
+			public: newStatus
+		}).then((res)=>{
+			console.log(res.data);
+			this._readEntries();
+		});
 	}
 
 	//====//
@@ -692,7 +706,7 @@ class Viewer extends React.Component{
 			<div>
 				<div id='viewerTitle'>
 					<h2>Project: <span id='projectTitle'> {this.props.projectName}</span> </h2>
-					 <select value={this.state.status} id={this.state.status} onClick={this._changeStatus.bind(this)}> 
+					 <select value={this.state.status} id={this.state.status} className="publicSelection" onChange={this._changeStatus.bind(this)}> 
 						<option value="Public">Public</option>
 						<option value="Private">Private</option>
 					</select>

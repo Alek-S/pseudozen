@@ -285,6 +285,45 @@ module.exports = function(app) {
 		}); //end of Project.count
 	}); //end of app.get
 
+	//update project public status - true=public false=private
+	app.put('/api/project/status/:projectName', (req,res)=>{
+		let title = req.params.projectName;
+		let user = req.session._creator;
+		let newStatus = req.body.public;
+		console.log(title);
+		//logged in?
+		if(!req.session.loggedIn && req.session.loggedIn !== true){
+			res.json({'status': 'fail - not logged in'});
+			return;
+		}
+
+		//check if project exists
+		Project.count({
+			title,
+			_creator: user
+		}, (err, count)=>{
+			if(count < 1){
+				res.json({'status': 'fail - project not found'});
+			}else{
+				//update public status
+				Project.update({
+					title: title,
+					_creator: user
+				},{
+					$set : { public: newStatus}
+				}, (err)=>{
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - could not set'});
+					}else{
+						res.json({'status': 'success'});
+					}
+				});
+
+			}
+		});//end of Project.count
+	}); //end of app.put
+
 
 	//=======================
 	//====PROJECT ENTRIES====

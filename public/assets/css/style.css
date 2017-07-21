@@ -273,7 +273,10 @@ aside .type:hover{
 #python{
 	border-radius: 0px 7px 7px 0px;
 }
-
+.publicSelection{
+	margin-top: 5px;
+	width: 70px;
+}
 
 /* ENTRY STYLES */
 #viewer pre{
