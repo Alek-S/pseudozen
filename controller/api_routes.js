@@ -261,7 +261,29 @@ module.exports = function(app) {
 		}
 	}); //end of app.get
 
+	//get project public status - true=public false=private
+	app.get('/api/project/status/:projectName', (req,res)=>{
+		let title = req.params.projectName;
 
+		//check if project exists
+		Project.count({title}, (err, count)=>{
+			if(count < 1){
+				res.json({'status': 'fail - project not found'});
+			}else{
+				//if exists, check it's public status
+				Project.find({title})
+					.select('public')
+					.exec( (err,docs)=>{
+						if(err){
+							console.log(err);
+							res.json({'status': 'fail - project find'});
+						}else{
+							res.json(docs[0].public);
+						}
+					}); //end of Project.find
+			}
+		}); //end of Project.count
+	}); //end of app.get
 
 
 	//=======================

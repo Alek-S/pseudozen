@@ -32,7 +32,7 @@ class New extends React.Component{
 			});
 	}
 
-		// <a className='btnDelete' href='' onClick={this._deleteProject.bind({this: this, name: project.title})}>DELETE</a>
+	
 	_populateProjects(){
 		let projects = this.state.projects;
 

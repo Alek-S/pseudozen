@@ -13,7 +13,8 @@ class Viewer extends React.Component{
 			textSelect: 'notActive',
 			plainText: 'active',
 			js: 'notActive',
-			python: 'notActive'
+			python: 'notActive',
+			status: ''
 		};
 
 		this._renderEntries = this._renderEntries.bind(this);
@@ -44,6 +45,21 @@ class Viewer extends React.Component{
 				});
 
 			});
+
+		axios.get(window.location.origin + '/api/project/status/' +  this.props.projectName)
+			.then( 
+				(response)=>{
+					if(response.data == true){
+						this.setState({
+							status: 'Public'
+						});
+					}else{
+						this.setState({
+							status: 'Private'
+						});
+					}
+				}
+			);
 	}
 
 
@@ -650,6 +666,11 @@ class Viewer extends React.Component{
 			python: 'active'
 		});
 	}
+
+	_changeStatus(){
+		//TODO: update public private in mongo
+	}
+
 	//====//
 
 
@@ -671,6 +692,10 @@ class Viewer extends React.Component{
 			<div>
 				<div id='viewerTitle'>
 					<h2>Project: <span id='projectTitle'> {this.props.projectName}</span> </h2>
+					 <select value={this.state.status} id={this.state.status} onClick={this._changeStatus.bind(this)}> 
+						<option value="Public">Public</option>
+						<option value="Private">Private</option>
+					</select>
 
 					<div id='selectViewer'>
 						<a className={this.state.editSelect} id="editSelect" onClick={this._selectEdit.bind(this)} href="">Edit Entries</a>
