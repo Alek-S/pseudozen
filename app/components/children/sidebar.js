@@ -110,7 +110,7 @@ class Sidebar extends React.Component{
 
 
 				<div id="loopSection" className='asideCategory'>
-					<h2>Control Flow & Iteration</h2>
+					<h2>Flow & Iteration</h2>
 
 					<a href='' onClick={this._handleClick.bind({category:'loop', type:'if'})}>
 						<div className='type'>
