@@ -237,7 +237,19 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						If
 						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
-						<input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} />
+						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} /> */}
+						
+						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})}>
+							<option selected value="is a">is a</option>
+							<option value="is not a">is not a</option>
+							<option value="contains">contains</option>
+							<option value="does not contain">does not contain</option>
+							<option value="is less than">is less than</option>
+							<option value="is less than or equal to">is less than or equal too</option>
+							<option value="is greater than">is greater than</option>
+							<option value="is greater than or equal to">is greater than or equal too</option>
+						</select>
+
 						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this) })} />
 
 						<div className='indentSelection'>
@@ -261,7 +273,18 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						While
 						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
-						<input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} />
+						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} /> */}
+						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})}>
+							<option selected value="is a">is a</option>
+							<option value="is not a">is not a</option>
+							<option value="contains">contains</option>
+							<option value="does not contain">does not contain</option>
+							<option value="is less than">is less than</option>
+							<option value="is less than or equal to">is less than or equal too</option>
+							<option value="is greater than">is greater than</option>
+							<option value="is greater than or equal to">is greater than or equal too</option>
+						</select>
+
 						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
 
 						<div className='indentSelection'>
@@ -410,7 +433,6 @@ class Viewer extends React.Component{
 
 		function returnTabs(total){
 			let toReturn;
-			console.log(total);
 
 			for(let i = 0; i <= total; ++i){
 				if(i < 1){
@@ -546,7 +568,7 @@ class Viewer extends React.Component{
 			title: window.location.search.slice(3),
 			index: this.index,
 			direction: 2
-		}).then((response)=>{;
+		}).then((response)=>{
 			this.fetch();
 		});
 	}

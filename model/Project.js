@@ -13,7 +13,14 @@ let ProjectSchema = new Schema({
 		type: Date, 
 		default: Date.now 
 	},
-	entry: []
+	entry: [],
+	public: {
+		type: Boolean,
+		default: true
+	},
+	description: {
+		type: String
+	}
 });
 
 let Project = mongoose.model('Project', ProjectSchema);
