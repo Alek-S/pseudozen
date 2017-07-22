@@ -17,12 +17,15 @@ a{
 strong{
 	font-weight: 600;
 }
+form{
+	margin-top: 15px;
+}
 input{
 	outline: none;
 	position: relative;
 	width: 200px;
 	margin-left: 15px;
-	margin-top: 15px;
+	margin-bottom: 15px; 
 	padding-left: 10px;
 	font-family: Quicksand, sans-serif;
 	font-size: .85em;
@@ -39,7 +42,11 @@ input:hover{
 input:focus{
 	border-bottom: 2px solid #ff6666;
 }
-
+label{
+	font-size: .7em;
+	margin-left: 20px;
+	color: #333333;
+}
 
 
 
@@ -104,7 +111,19 @@ header{
 	right: 60px;
 	top: 60px;
 	width: 240px;
-	height: 175px;
+	height: 205px;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.45);
+	z-index: 5;
+}
+#registerPrompt{
+	display: none;
+	position: absolute;
+	right: 15px;
+	top: 60px;
+	width: 240px;
+	height: 365px;
 	background-color: #fff;
 	border-radius: 5px;
 	box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.45);
@@ -136,6 +155,33 @@ header{
 /*overide default*/
 #submit{
 	position: relative;
-	top: 30px;
+	top: 15px;
 	margin-left: 20px;
+}
+#registerbtn{
+	position: relative;
+	top: 5px; 
+	margin-left: 20px;
+}
+#loginError{
+	display: none;
+	position: relative;
+	background-color: #ff6666;
+	font-size: .8em;
+	width: 90%;
+	margin: auto;
+	padding: 5px;
+	border-radius: 4px;
+	bottom: -35px;
+}
+#registerError{
+	display: none;
+	position: relative;
+	background-color: #ff6666;
+	font-size: .8em;
+	width: 90%;
+	margin: auto;
+	padding: 5px;
+	border-radius: 4px;
+	bottom: -24px;
 }

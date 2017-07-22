@@ -56,9 +56,7 @@ describe(chalk.yellow('::API Routes::'), function () {
 			request(server)
 				.post('/api/user')
 				.send({email: 'foobar@test.com', password:'testaccount'})
-				.expect(200, {
-					status: 'success'
-				},done);
+				.expect(200,done);
 		});
 
 		it('responds to POST /api/password {"status": "success"}', function(done) {

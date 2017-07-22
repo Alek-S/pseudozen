@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="./assets/css/reset.css">
 	<link rel="stylesheet" href="./assets/css/index.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="./assets/js/validator.min.js"></script>
 </head>
 <body>
 
@@ -24,9 +25,29 @@
 		<form>
             <input id='email' type="email" name="email" placeholder="email@account.com" required>
             <input id='password' type="password" name="password" placeholder="password" required>
-            <a href="" id='submit' type="submit" class="btn">Submit</a>
+			<a href="" id='submit' type="submit" class="btn">Submit</a>
+			<div id='loginError'></div>
         </form>
 	</section>
+
+	<section id='registerPrompt'>
+		<form>
+			<label for="emailReg">Email Address:</label>
+			<input id='emailReg' type="email" name="email" placeholder="email@account.com" required>
+
+			<label for="nameReg">User Name:</label>
+			<input id='nameReg' type="text" name="name" placeholder="Jonn Doe" required>
+
+			<label for="passwordReg">Password:</label>
+			<input id='passwordReg' type="password" name="password" placeholder="password" required>
+
+			<label for="passwordReg">Confirm Password:</label>
+			<input id='passwordMatch' type="password" name="password" placeholder="password again" required>
+			<a href="" id='registerbtn' type="submit" class="btn">Register</a>
+			<div id='registerError'></div>
+        </form>
+	</section>
+
 
 
 	<section id='banner'>
