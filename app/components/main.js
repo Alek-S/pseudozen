@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import Editor from './children/editor.js';
 import New from './children/new.js';
+import Public from './children/public.js';
+import PublicViewer from './children/publicView.js';
 
 class Main extends React.Component{
 	constructor(){
@@ -25,29 +27,50 @@ class Main extends React.Component{
 				window.location.replace(window.location.origin + '/');
 			});
 	}
+	
+	_getNav(){
+		let pathname = window.location.pathname;
+
+		if(pathname === '/project'){
+			return(
+				<div id="nav">
+					<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+					<a href="/project" className="btn" id="back">back</a>
+					<a href="" className="btn" id="logout" onClick={this._handleLogout.bind(this) }>logout</a>
+				</div>
+			);
+		}
+		if(pathname === '/public'){
+			return(
+				<div id="nav">
+					<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+					<a href="/public" className="btn" id="back">back</a>
+				</div>
+			);
+		}
+	}
 	//====//
 
 
 
 	//==RENDER==
 	render(){
-
 		let body = null;
 
-		if (this.state.projectSelected === false && !location.search ){
+		if (window.location.pathname === '/project' && this.state.projectSelected === false && !location.search ){
 			body = <New />;
-		}else{
+		}else if(window.location.pathname === '/project') {
 			body = <Editor  project={location.search.slice(3)} />;
+		}else if(window.location.pathname === '/public' && !location.search ){
+			body = <Public />;
+		}else{
+			body = <PublicViewer project={location.search.slice(3)} />
 		}
 
 		return(
 			<div>
 				<header>
-					<div id="nav">
-						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
-						<a href="/project" className="btn" id="back">back</a>
-						<a href="" className="btn" id="logout" onClick={this._handleLogout.bind(this) }>logout</a>
-					</div>
+					{this._getNav()}
 				</header>
 
 				<section id='main'>

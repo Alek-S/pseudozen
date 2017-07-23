@@ -16,4 +16,13 @@ module.exports = function(app) {
 			res.redirect('/');
 		}
 	});
+
+	app.get('/public', (req,res)=>{
+
+		if(req.query.p){
+			console.log({ projectQuery: req.query.p });
+		}
+
+		res.sendFile(path.join(__dirname, '../public/public.html'));
+	});
 };

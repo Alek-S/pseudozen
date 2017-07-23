@@ -261,6 +261,20 @@ module.exports = function(app) {
 		}
 	}); //end of app.get
 
+	//get all public projects
+	app.get('/api/project/public', (req,res)=>{
+
+		Project.find({public: true}, (err,docs)=>{
+			if(err){
+				console.log(err);
+				res.json({'status': 'fail - project find'});
+			}else{
+				res.json(docs);
+			}
+		}); //end of Project.find
+		
+	}); //end of app.get
+
 	//get project public status - true=public false=private
 	app.get('/api/project/status/:projectName', (req,res)=>{
 		let title = req.params.projectName;
@@ -355,6 +369,28 @@ module.exports = function(app) {
 						}
 					});
 			}
+		}
+	});
+
+	//get entries for project
+	app.get('/api/project/public/entry/:projectName?', (req,res)=>{
+		let title = req.params.projectName;
+
+		if(!title){
+			res.json({'status': 'fail - missing project name'});
+		}else{
+			Project.find({
+				title: title,
+			})
+				.select('entry')
+				.exec( (err, docs)=>{
+					if(err){
+						console.log(err);
+						res.json({'status': 'fail - error finding entries'});
+					}else{
+						res.json(docs);
+					}
+				});		
 		}
 	});
 
