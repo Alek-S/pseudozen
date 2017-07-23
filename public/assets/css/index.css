@@ -185,3 +185,8 @@ header{
 	border-radius: 4px;
 	bottom: -24px;
 }
+#logoSVG{
+	position: absolute;
+	top: 7px;
+	left: 7px;
+}

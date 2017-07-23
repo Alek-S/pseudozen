@@ -44,6 +44,7 @@ class Main extends React.Component{
 			<div>
 				<header>
 					<div id="nav">
+						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
 						<a href="/project" className="btn" id="back">back</a>
 						<a href="" className="btn" id="logout" onClick={this._handleLogout.bind(this) }>logout</a>
 					</div>
