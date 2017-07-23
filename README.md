@@ -29,3 +29,6 @@ Projects can also be publicly shared, allowing others to see your thought proces
  
  ## Deployment
  Ubuntu Linux, NGINX, PM2, Keymetrics
+ 
+ 
+<img src="./screenshot/keymetrics.png">
