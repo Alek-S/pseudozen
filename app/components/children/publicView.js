@@ -166,6 +166,8 @@ class PublicViewer extends React.Component{
 							<option value="is greater than">is greater than</option>
 							<option value="is greater than or equal to">is greater than or equal too</option>
 						</select>
+
+						<input placeholder='Second' value={this.state.entries[index].forms.value} />
 					</div>
 				);
 
@@ -185,6 +187,8 @@ class PublicViewer extends React.Component{
 							<option value="is greater than">is greater than</option>
 							<option value="is greater than or equal to">is greater than or equal too</option>
 						</select>
+
+						<input placeholder='Second' value={this.state.entries[index].forms.value} />
 					</div>
 				);
 
