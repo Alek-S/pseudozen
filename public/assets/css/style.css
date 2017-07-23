@@ -94,11 +94,11 @@ select{
 	border-radius: 10px;
 	box-shadow: 0px 0px 65px 0px rgba(0,0,0,0.35);
 	background: linear-gradient(to bottom, #499bea 0%, #207ce5 100%);
-	transition: all .5s ease; 
+	transition: all .3s; 
 }
 .projectCard:hover{
-	position: relative;
-	height: 120px;
+	top: 20px;
+	height: 110px;
 	background: linear-gradient(to bottom, #ffaf4b 0%, #ff920a 100%);
 	box-shadow: 0px 0px 65px 0px rgba(235,183,50,0.55);
 }

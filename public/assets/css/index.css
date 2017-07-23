@@ -71,7 +71,8 @@ header{
 }
 #title{
 	position: relative;
-	top: -150px;
+	top: -200px;
+	width: 100%;
 	font-size: 4.7em;
 	font-weight: 300;
 	color: #33bbff;
@@ -84,13 +85,13 @@ header{
 
 #about{
 	position: relative;
-	top: -100px;
+	top: -80px;  
 	margin-top: 0px;
-	height: 700px;
+	padding-bottom: 70px;
 	background: linear-gradient(to bottom, #38aed9 0%, #3893d9 100%);
 }
 #about h2{
-	padding-top: 100px;
+	padding-top: 50px;
 	color: #fff;
 	font-size: 2em;
 	font-weight: 300;
@@ -103,6 +104,7 @@ header{
 	line-height: 150%;
 	width: 70%;
 	font-weight: 300;
+	font-size: 1.1em;
 }
 
 #loginPrompt{
@@ -189,4 +191,29 @@ header{
 	position: absolute;
 	top: 7px;
 	left: 7px;
+}
+.video{
+	margin: auto;
+	width: 640px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	box-shadow: 0px 0px 20px -1px rgba(0,0,0,0.60);
+}
+footer{
+	position: relative;
+	bottom: 35px;
+	text-align: center;
+	font-size: .9em;
+}
+footer p{
+	color: #4d4d4d;
+	margin-bottom: 10px;
+}
+.footerLink{
+	color: #333333;
+	text-decoration: underline;
+	transition: .5s;
+}
+.footerLink:hover{
+	color:#ff6666
 }
