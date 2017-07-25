@@ -5,3 +5,5 @@ before_install:
 - npm install -g snyk
 services:
   - mongodb
+env:
+  - NODE_ENV=production
