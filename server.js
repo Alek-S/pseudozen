@@ -41,7 +41,7 @@ app.set('trust proxy', 1);
 //===SESSIONS===
 let secret = undefined;
 
-if (process.env.zenSecret){
+if (process.env.zenZecret){
 	secret = process.env.zenSecret;
 }else{
 	secret = 'development-only';
