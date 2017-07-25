@@ -39,11 +39,18 @@ app.set('trust proxy', 1);
 
 
 //===SESSIONS===
+let secret = undefined;
+
+if (process.env.zenZecret){
+	secret = process.env.zenSecret;
+}else{
+	secret = 'development-only';
+}
+
 app.use(session({
-	secret: 'sandbox',
+	secret: secret,
 	resave: false,
 	saveUninitialized: true
-	// cookie: { secure: true } //get https set for this
 }));
 
 
