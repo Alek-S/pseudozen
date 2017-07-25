@@ -14,6 +14,18 @@ describe( chalk.yellow('::HTML Routes::\n'), function () {
 			.expect(200, done);
 	});
 
+	it('responds to GET /project, with redirect due to not being logged in', function(done) {
+		request(server)
+			.get('/project')
+			.expect(302, done);
+	});
+
+	it('responds to GET /public', function(done) {
+		request(server)
+			.get('/public')
+			.expect(200, done);
+	});
+
 	it('responds to GET /assets/css/style.css', function(done) {
 		request(server)
 			.get('/assets/css/style.css')
@@ -95,6 +107,12 @@ describe(chalk.yellow('::API Routes::'), function () {
 				.expect(200, done);
 		});
 
+		it('responds to GET /api/project/public', function(done) {
+			request(server)
+				.get('/api/project/public')
+				.expect(200, done);
+		});
+
 	});
 
 	describe(chalk.green('\nEntry Routes:'), function () {
@@ -102,6 +120,12 @@ describe(chalk.yellow('::API Routes::'), function () {
 		it('responds to GET /api/project/entry', function(done) {
 			request(server)
 				.get('/api/project/entry')
+				.expect(200, done);
+		});
+
+		it('responds to GET /api/project/public/entry/fake', function(done) {
+			request(server)
+				.get('/api/project/public/entry/fake')
 				.expect(200, done);
 		});
 
