@@ -29,7 +29,7 @@ User interface created with __React__, with React __PropTypes__ module for prop 
  ### Testing
  Travis CI, Mocha, Supertest, Gemnasium, Snyk
  
- ### Deployment
+ ### Deployment & Monitoring
  Ubuntu Linux, NGINX, PM2, Keymetrics
  
  
