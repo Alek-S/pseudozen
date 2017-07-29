@@ -15,7 +15,7 @@ The editor uses an intuitive and clean visual UI, where entries can be added, mo
 
 Projects can also be publicly shared, allowing others to see your thought process. This is ideal for quick mockups to confirm everyone is on the same page, or for impromptu training sessions.
 
-* UI created with __React__, with React __PropTypes__ module for prop validation. 
+* Front-end created using __React__, with React __PropTypes__ module for prop validation. 
 * __Webpack__ and __Babel__ used for transpiling and JS uglifying. 
 * __REST API__ server using __Node__ and __Express__. 
 * User data persisted using __MongoDB/Mongoose__. 
