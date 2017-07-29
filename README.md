@@ -4,7 +4,7 @@
 
 # Pseudo Zen
 
-#### Try It Now: [Live Page Link](http://45.76.18.225/)
+#### Try It Now: [https://pseudo-zen.com/](https://pseudo-zen.com/)
 
 
 ![example](./screenshot/example.gif)
@@ -15,7 +15,16 @@ The editor uses an intuitive and clean visual UI, where entries can be added, mo
 
 Projects can also be publicly shared, allowing others to see your thought process. This is ideal for quick mockups to confirm everyone is on the same page, or for impromptu training sessions.
 
-User interface created with __React__, with React __PropTypes__ module for prop validation. __Webpack__ and __Babel__ used for transpiling. __REST API__ server using __Node__ and __Express__. User data persisted using __MongoDB/Mongoose__. Server hosted on a __Ubuntu Linux__ VPS using __NGINX__ for reverse proxy and for gzipping outgoing responses. __PM2__ with __Keymetrics__ used for Node and MongoDB monitoring and exception notification. __Travis CI__, __Mocha__ and __Supertest__ used for validation. __Snyk__ and __Helmet__ used for dependency vulnerability check and header security.
+* UI created with __React__, with React __PropTypes__ module for prop validation. 
+* __Webpack__ and __Babel__ used for transpiling and JS uglifying. 
+* __REST API__ server using __Node__ and __Express__. 
+* User data persisted using __MongoDB/Mongoose__. 
+* Server hosted on a __Ubuntu Linux__ VPS. 
+* __NGINX__ used for reverse proxy and for gzipping outgoing static files, and SSL. 
+* SSL certificate from __Let's Encrypt__.
+* __PM2__ with __Keymetrics__ used for Node and MongoDB monitoring and exception notification. 
+* __Travis CI__, __Mocha__ and __Supertest__ used for testing. 
+* __Snyk__ and __Helmet__ used for dependency vulnerability check and header security.
 
  ## Technology Used
  React, Express, Node.js, MongoDB, Mongoose, Webpack, Babel, Axios, Validator.js
@@ -30,7 +39,9 @@ User interface created with __React__, with React __PropTypes__ module for prop 
  Travis CI, Mocha, Supertest, Gemnasium, Snyk
  
  ### Deployment & Monitoring
- Ubuntu Linux, NGINX, PM2, Keymetrics
- 
- 
+ Ubuntu Linux, NGINX, PM2, Keymetrics, Let's Encrypt
+
+SSL Labs: [Report](https://www.ssllabs.com/ssltest/analyze.html?d=pseudo-zen.com)
+<img src="./screenshot/ssl-test.png">
+
 <img src="./screenshot/keymetrics.png">
