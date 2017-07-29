@@ -12,11 +12,16 @@ class Main extends React.Component{
 		super();
 
 		this.state = {
-			projectSelected: false,
+			name: undefined
 		};
 	}
 	
+	//==Life Cycle==
+	componentWillMount(){
+		this._getUser();
+	}
 
+	//====//
 	
 	//==HANDLERS==
 	_handleLogout(event){
@@ -28,14 +33,30 @@ class Main extends React.Component{
 			});
 	}
 	
+	_getUser(){
+		if(window.location.pathname === '/project' && this.state.name === undefined){
+			console.log(1);
+			axios.get(window.location.origin + '/api/name')
+				.then( (res)=>{
+					if(res.data.name){
+						this.setState({
+							name: res.data.name
+						});
+					}
+				});
+		}
+	}
+	
 	_getNav(){
 		let pathname = window.location.pathname;
 
 		if(pathname === '/project'){
+			
 			if(!location.search || location.search.length < 1 ){
 				return(
 					<div id="nav">
 						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+						<p id='accountName'> {this.state.name}'s Account</p> 
 						<a href="/" className="btn" id="back">back</a>
 						<a href="" className="btn" id="logout" onClick={this._handleLogout.bind(this) }>logout</a>
 					</div>
@@ -44,6 +65,7 @@ class Main extends React.Component{
 				return(
 					<div id="nav">
 						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+						<p id='accountName'> {this.state.name}'s Account</p> 
 						<a href="/project" className="btn" id="back">back</a>
 						<a href="" className="btn" id="logout" onClick={this._handleLogout.bind(this) }>logout</a>
 					</div>
@@ -55,6 +77,7 @@ class Main extends React.Component{
 				return(
 					<div id="nav">
 						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+						<p id='accountName'>Public Projects</p> 
 						<a href="/" className="btn" id="back">back</a>
 					</div>
 				);
@@ -62,6 +85,7 @@ class Main extends React.Component{
 				return(
 					<div id="nav">
 						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+						<p id='accountName'>Public Projects</p> 
 						<a href="/public" className="btn" id="back">back</a>
 					</div>
 				);
@@ -76,14 +100,14 @@ class Main extends React.Component{
 	render(){
 		let body = null;
 
-		if (window.location.pathname === '/project' && this.state.projectSelected === false && !location.search ){
+		if (window.location.pathname === '/project' && !location.search ){
 			body = <New />;
 		}else if(window.location.pathname === '/project') {
 			body = <Editor  project={location.search.slice(3)} />;
 		}else if(window.location.pathname === '/public' && !location.search ){
 			body = <Public />;
 		}else{
-			body = <PublicViewer project={location.search.slice(3)} />
+			body = <PublicViewer project={location.search.slice(3)} />;
 		}
 
 		return(

@@ -49,6 +49,14 @@ module.exports = function(app) {
 		}
 	}); //end of /api/user/:email
 
+	app.get('/api/name', (req,res)=>{
+
+		if(req.session._creator){
+			res.json({name: req.session.name});
+		}else{
+			res.json({'status': 'fail - not logged in'});
+		}
+	});
 
 	//create new user
 	app.post('/api/user', (req,res)=>{
