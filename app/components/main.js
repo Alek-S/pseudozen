@@ -51,12 +51,21 @@ class Main extends React.Component{
 			}
 		}
 		if(pathname === '/public'){
-			return(
-				<div id="nav">
-					<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
-					<a href="/public" className="btn" id="back">back</a>
-				</div>
-			);
+			if(!location.search || location.search.length < 1 ){
+				return(
+					<div id="nav">
+						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+						<a href="/" className="btn" id="back">back</a>
+					</div>
+				);
+			}else{
+				return(
+					<div id="nav">
+						<a href="/"><img id='logoSVG' src="./assets/images/logo.svg" alt="Logo" height="40px" /></a>
+						<a href="/public" className="btn" id="back">back</a>
+					</div>
+				);
+			}
 		}
 	}
 	//====//
