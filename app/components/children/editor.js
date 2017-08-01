@@ -26,10 +26,11 @@ class Editor extends React.Component{
 
 	//==HANDLERS==
 	_handleKeyUp(){
-		// console.log('click');
-		this.setState({
-			timestamp: new Date().getTime()
-		});
+		setTimeout(()=>{ 
+			this.setState({
+				timestamp: new Date().getTime()
+			});
+		}, 150);
 	}
 	//====//
 
