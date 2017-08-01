@@ -45,3 +45,6 @@ SSL Labs: [Report](https://www.ssllabs.com/ssltest/analyze.html?d=pseudo-zen.com
 <img src="./screenshot/ssl-test.png">
 
 <img src="./screenshot/keymetrics.png">
+
+<img src="./screenshot/test.png" width="700">
+
