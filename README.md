@@ -5,7 +5,8 @@
 # Pseudo Zen
 
 #### Try It Now: [https://pseudo-zen.com/](https://pseudo-zen.com/)
-
+<sub>Sandbox Account: { User: example@account.com, Password: foobar }</sub>
+ 
 
 ![example](./screenshot/example.gif)
 
