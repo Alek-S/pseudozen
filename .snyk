@@ -6,3 +6,12 @@ patch:
   'npm:ms:20170412':
     - bcrypt > node-pre-gyp > tar-pack > debug > ms:
         patched: '2017-07-11T03:45:33.444Z'
+  'npm:debug:20170905':
+    - morgan > debug:
+        patched: '2017-09-26T22:49:07.771Z'
+    - mongoose > mquery > debug:
+        patched: '2017-09-26T22:49:07.771Z'
+    - helmet > connect > debug:
+        patched: '2017-09-26T22:49:07.771Z'
+    - helmet > connect > finalhandler > debug:
+        patched: '2017-09-26T22:49:07.771Z'

@@ -37,7 +37,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "snyk": "^1.36.2",
+    "snyk": "^1.41.1",
     "validator": "^8.0.0"
   },
   "devDependencies": {
