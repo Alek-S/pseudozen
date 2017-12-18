@@ -10,13 +10,13 @@
 
 ![example](./screenshot/example.gif)
 
-Pseudo Zen is an online pseudocoder, that makes pseudocoding as easy at it should be. With Pseudo Zen, there's no longer an excuse for not pseudo-coding your projects beforehand.
+Pseudo Zen is an online pseudocoder that makes pseudocoding as easy at it should be. With Pseudo Zen, there's no longer an excuse for not pseudo-coding your projects beforehand.
 
 The editor uses an intuitive and clean visual UI, where entries can be added, moved and removed all within a few clicks. It accentuates what matters while avoiding superfluous clutter. This allows you to just focus on the logic, without getting hung up on syntax.
 
 Projects can also be publicly shared, allowing others to see your thought process. This is ideal for quick mockups to confirm everyone is on the same page, or for impromptu training sessions.
 
-* Front-end created using __React__, with React __PropTypes__ module for prop validation. 
+* Front-end using __React__, with __PropTypes__ module for prop validation (dev-mode), and __validator.js__ for form validation. 
 * __Webpack__ and __Babel__ used for transpiling and JS uglifying. 
 * __REST API__ server using __Node__ and __Express__. 
 * User data persisted using __MongoDB/Mongoose__. 
