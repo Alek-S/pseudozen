@@ -71,7 +71,11 @@ require('./controller/api_routes.js')(app);
 
 //==Start Server==
 let server = app.listen(app.get('port'), function() {
-	console.log('Running on Port:', app.get('port'),'\n' );
+	if(process.env.PORT){
+		console.log('Running on Port:', app.get('port'),'\n' );
+	}else{
+		console.log(`Running on: http://localhost:${app.get('port')}\n` );
+	}
 });
 
 module.exports = server; //for mocha
