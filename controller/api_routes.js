@@ -536,6 +536,7 @@ module.exports = function(app) {
 
 		if(!title || !direction || index === undefined){
 			res.json({'status': 'fail - missing body parameters'});
+			return;
 		}
 
 		let position = 'entry.' + index;
@@ -628,6 +629,7 @@ module.exports = function(app) {
 		
 		if(!title || !direction || index === undefined){
 			res.json({'status': 'fail - missing body fields'});
+			return;
 		}
 
 		let currentIndent = getCurrentIndent();

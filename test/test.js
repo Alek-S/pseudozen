@@ -32,9 +32,15 @@ describe( chalk.yellow('::HTML Routes::\n'), function () {
 			.expect(200, done);
 	});
 
-	it('responds to GET /assets/js/bundle.js', function(done) {
+	it('responds to GET /assets/js/vendor.js', function(done) {
 		request(server)
-			.get('/assets/js/bundle.js')
+			.get('/assets/js/vendor.js')
+			.expect(200, done);
+	});
+
+	it('responds to GET /assets/js/main.js', function(done) {
+		request(server)
+			.get('/assets/js/main.js')
 			.expect(200, done);
 	});
 
