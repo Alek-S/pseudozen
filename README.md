@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Alek-S/pseudozen.svg?branch=master)](https://travis-ci.org/Alek-S/pseudozen)
 [![Dependency Status](https://gemnasium.com/badges/github.com/Alek-S/pseudozen.svg)](https://gemnasium.com/github.com/Alek-S/pseudozen)
 [![Known Vulnerabilities](https://snyk.io/test/github/alek-s/pseudozen/badge.svg)](https://snyk.io/test/github/alek-s/pseudozen)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Pseudo Zen
 
@@ -24,7 +25,7 @@ Projects can also be publicly shared, allowing others to see your thought proces
 * __NGINX__ used for reverse proxy and for gzipping outgoing static files, and SSL. 
 * SSL certificate from __Let's Encrypt__.
 * __PM2__ with __Keymetrics__ used for Node and MongoDB monitoring and exception notification. 
-* __Travis CI__, __Mocha__ and __Supertest__ used for testing. 
+* __Travis CI__, __Mocha__ and __Supertest__ used for API endpoint testing, and __Prettier__ for pre-commit formatting. 
 * __Snyk__ and __Helmet__ used for dependency vulnerability check and header security.
 
  ## Technology Used
@@ -36,14 +37,13 @@ Projects can also be publicly shared, allowing others to see your thought proces
  ### Middleware
  Helmet, Morgan
  
- ### Testing
- Travis CI, Mocha, Supertest, Gemnasium, Snyk
+ ### Linting & Testing
+ Prettier, Eslint, Travis CI, Mocha, Supertest, Gemnasium, Snyk
  
  ### Deployment & Monitoring
  Ubuntu Linux, NGINX, PM2, Keymetrics, Let's Encrypt
 
 SSL Labs: [Report](https://www.ssllabs.com/ssltest/analyze.html?d=pseudo-zen.com)
-<img src="./screenshot/ssl-test.png">
 
 <img src="./screenshot/keymetrics.png">
 
