@@ -70,7 +70,7 @@ class Main extends React.Component {
 							href=""
 							className="btn"
 							id="logout"
-							onClick={this._handleLogout.bind(this)}
+							onClick={e => this._handleLogout(e)}
 						>
 							logout
 						</a>
@@ -95,7 +95,7 @@ class Main extends React.Component {
 							href=""
 							className="btn"
 							id="logout"
-							onClick={this._handleLogout.bind(this)}
+							onClick={e => this._handleLogout(e)}
 						>
 							logout
 						</a>

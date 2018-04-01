@@ -16,9 +16,6 @@ class Viewer extends React.Component{
 			python: 'notActive',
 			status: ''
 		};
-
-		this._renderEntries = this._renderEntries.bind(this);
-		this._buildEntry = this._buildEntry.bind(this);
 	}
 
 
@@ -91,7 +88,7 @@ class Viewer extends React.Component{
 	}
 
 	//returns entry divs when in edit mode
-	_buildEntry(index, event){
+	_buildEntry(index){
 		let currentEntry = this.state.entries[index];
 
 
@@ -102,20 +99,20 @@ class Viewer extends React.Component{
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Initialize 
 
-						<input placeholder='Variable' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: e => this._readEntries(e)})} />
 						
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 
-						<a className='btnDeleteEntry' title='Delete Entry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' title='Delete Entry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 						
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e =>  this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -124,22 +121,22 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Set 
-						<input placeholder='Variable' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
+						<input placeholder='Variable' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: e => this._readEntries(e)})} /> 
 						equal to 
-						<input placeholder='being assigned' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='being assigned' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -148,24 +145,24 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Add
-						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: e => this._readEntries(e)})} /> 
 						to 
-						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: e => this._readEntries(e)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this) })} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: e => this._readEntries(e) })} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -174,24 +171,24 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Subtract
-						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: e => this._readEntries(e)})} /> 
 						from 
-						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: e =>  this._readEntries(e)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -200,24 +197,24 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Multiply
-						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: e => this._readEntries(e)})} /> 
 						by 
-						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: e => this._readEntries(e)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a> 
 						
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -226,24 +223,24 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Divide
-						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: this._readEntries.bind(this)})} /> 
+						<input value={this.state.entries[index].forms.firstVal} onChange={this._handleFormChange.bind({index:index, field: 'firstVal', fetch: e => this._readEntries(e)})} /> 
 						by 
-						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: this._readEntries.bind(this)})} />
+						<input value={this.state.entries[index].forms.secondVal} onChange={this._handleFormChange.bind({index:index, field: 'secondVal', fetch: e => this._readEntries(e)})} />
 						and assign to
-						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Variable' value={this.state.entries[index].forms.assignee} onChange={this._handleFormChange.bind({index:index, field: 'assignee', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div>  
 					</div>
 				);
@@ -252,10 +249,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						If
-						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
-						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} /> */}
+						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: e => this._readEntries(e)})} /> 
 						
-						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})}>
+						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: e => this._readEntries(e)})}>
 							<option selected value="is a">is a</option>
 							<option value="is not a">is not a</option>
 							<option value="contains">contains</option>
@@ -266,20 +262,20 @@ class Viewer extends React.Component{
 							<option value="is greater than or equal to">is greater than or equal too</option>
 						</select>
 
-						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this) })} />
+						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: e => this._readEntries(e) })} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -288,9 +284,9 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						While
-						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: this._readEntries.bind(this)})} /> 
-						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} /> */}
-						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})}>
+						<input placeholder='First' value={this.state.entries[index].forms.name} onChange={this._handleFormChange.bind({index:index, field: 'name', fetch: e => this._readEntries(e)})} /> 
+						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: e => this._readEntries(e)})} /> */}
+						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: e => this._readEntries(e)})}>
 							<option selected value="is a">is a</option>
 							<option value="is not a">is not a</option>
 							<option value="contains">contains</option>
@@ -301,20 +297,20 @@ class Viewer extends React.Component{
 							<option value="is greater than or equal to">is greater than or equal too</option>
 						</select>
 
-						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Second' value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -323,22 +319,22 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Read from
-						<input placeholder='Source' value={this.state.entries[index].forms.from} onChange={this._handleFormChange.bind({index:index, field: 'from', fetch: this._readEntries.bind(this)})} /> 
+						<input placeholder='Source' value={this.state.entries[index].forms.from} onChange={this._handleFormChange.bind({index:index, field: 'from', fetch: e => this._readEntries(e)})} /> 
 						to
-						<input placeholder='Destination' value={this.state.entries[index].forms.to} onChange={this._handleFormChange.bind({index:index, field: 'to', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Destination' value={this.state.entries[index].forms.to} onChange={this._handleFormChange.bind({index:index, field: 'to', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -347,22 +343,22 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Write from
-						<input placeholder='Source' value={this.state.entries[index].forms.from} onChange={this._handleFormChange.bind({index:index, field: 'from', fetch: this._readEntries.bind(this)})} /> 
+						<input placeholder='Source' value={this.state.entries[index].forms.from} onChange={this._handleFormChange.bind({index:index, field: 'from', fetch: e => this._readEntries(e)})} /> 
 						to
-						<input placeholder='Destination' value={this.state.entries[index].forms.to} onChange={this._handleFormChange.bind({index:index, field: 'to', fetch: this._readEntries.bind(this)})} />
+						<input placeholder='Destination' value={this.state.entries[index].forms.to} onChange={this._handleFormChange.bind({index:index, field: 'to', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -371,20 +367,20 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Print
-						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} />
+						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: e => this._readEntries(e)})} />
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a> 
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -393,20 +389,20 @@ class Viewer extends React.Component{
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						Return
-						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} /> 
+						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: e => this._readEntries(e)})} /> 
 
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 						
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -414,20 +410,20 @@ class Viewer extends React.Component{
 			case 'freeform':
 				return (
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
-						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: this._readEntries.bind(this)})} /> 
+						<input value={this.state.entries[index].forms.value} onChange={this._handleFormChange.bind({index:index, field: 'value', fetch: e => this._readEntries(e)})} /> 
 						
 						<div className='indentSelection'>
-							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: this._readEntries.bind(this)})}>&#8676;</a>|
-							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: this._readEntries.bind(this)})}>&#8677;</a>	
+							<a href='' title='Indent Left' onClick={this._indentLeft.bind({index, fetch: e => this._readEntries(e)})}>&#8676;</a>|
+							<a href='' title='Indent Right' onClick={this._indentRight.bind({index, fetch: e => this._readEntries(e)})}>&#8677;</a>	
 						</div> 
 
-						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: this._readEntries.bind(this)})}>
+						<a className='btnDeleteEntry' href='' onClick={this._deleteEntry.bind({index, fetch: e => this._readEntries(e)})}>
 							<img src="assets/images/trash.svg" height="15px" alt="trash"/>
 						</a>
 
 						<div className='arrowSelection'>
-							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: this._readEntries.bind(this)})} >&#9650;</a>	
-							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: this._readEntries.bind(this)})} >&#9660;</a>	
+							<a href='' title='Move Up' onClick={this._moveUp.bind({index, fetch: e => this._readEntries(e)})} >&#9650;</a>	
+							<a href='' title='Move Down' onClick={this._moveDown.bind({index, fetch: e => this._readEntries(e)})} >&#9660;</a>	
 						</div> 
 					</div>
 				);
@@ -539,9 +535,6 @@ class Viewer extends React.Component{
 			index: this.index,
 			field: this.field,
 			value: event.target.value,
-		}).then((response)=>{
-			// console.log(response);
-			this.fetch();
 		});
 	}
 	
@@ -557,8 +550,7 @@ class Viewer extends React.Component{
 				index: this.index,
 			}
 		})
-			.then( (res)=>{
-				// console.log(res.data);
+			.then( ()=>{
 				this.fetch();
 			});
 	}
@@ -584,7 +576,7 @@ class Viewer extends React.Component{
 			title: window.location.search.slice(3),
 			index: this.index,
 			direction: 2
-		}).then((response)=>{
+		}).then(()=>{
 			this.fetch();
 		});
 	}
@@ -695,9 +687,9 @@ class Viewer extends React.Component{
 		if(this.state.textSelect === 'active'){
 			languageSelect =
 				<div className='languageSelect'>
-					<a className={this.state.plainText} onClick={this._selectPlainText.bind(this)} id='plainText' href=''>Plain Text</a>
-					<a className={this.state.js} onClick={this._selectJS.bind(this)} id='js' href=''>JS/Go/C/Java</a>
-					<a className={this.state.python} onClick={this._selectPython.bind(this)} id='python' href=''>Python/Ruby</a>
+					<a className={this.state.plainText} onClick={e => this._selectPlainText(e)} id='plainText' href=''>Plain Text</a>
+					<a className={this.state.js} onClick={e => this._selectJS(e)} id='js' href=''>JS/Go/C/Java</a>
+					<a className={this.state.python} onClick={e => this._selectPython(e)} id='python' href=''>Python/Ruby</a>
 				</div>;
 		}
 
@@ -706,14 +698,14 @@ class Viewer extends React.Component{
 			<div>
 				<div id='viewerTitle'>
 					<h2>Project: <span id='projectTitle'> {this.props.projectName}</span> </h2>
-					 <select value={this.state.status} id={this.state.status} className="publicSelection" onChange={this._changeStatus.bind(this)}> 
+					<select value={this.state.status} id={this.state.status} className="publicSelection" onChange={e => this._changeStatus(e)}> 
 						<option value="Public">Public</option>
 						<option value="Private">Private</option>
 					</select>
 
 					<div id='selectViewer'>
-						<a className={this.state.editSelect} id="editSelect" onClick={this._selectEdit.bind(this)} href="">Edit Entries</a>
-						<a className={this.state.textSelect} id="textSelect" onClick={this._selectText.bind(this)} href="">Export Text</a>
+						<a className={this.state.editSelect} id="editSelect" onClick={e => this._selectEdit(e)} href="">Edit Entries</a>
+						<a className={this.state.textSelect} id="textSelect" onClick={e => this._selectText(e)} href="">Export Text</a>
 						{languageSelect}
 					</div>
 				</div>

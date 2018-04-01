@@ -10,6 +10,7 @@
     "test": "mocha --exit",
     "start": "node server.js",
     "build": "webpack --progress -p",
+    "watch": "webpack -w",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
     "precommit": "lint-staged && npm test"

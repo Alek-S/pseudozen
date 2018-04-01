@@ -40,7 +40,7 @@ class Editor extends React.Component{
 	render(){
 		return(
 			<div id='main'>
-				<aside onClick={this._handleKeyUp.bind(this)}>
+				<aside onClick={e => this._handleKeyUp(e)}>
 					<Sidebar projectName={this.props.project}/>
 				</aside>
 

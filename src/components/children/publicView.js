@@ -16,9 +16,6 @@ class PublicViewer extends React.Component{
 			python: 'notActive',
 			status: ''
 		};
-
-		this._renderEntries = this._renderEntries.bind(this);
-		this._buildEntry = this._buildEntry.bind(this);
 	}
 
 
@@ -154,7 +151,6 @@ class PublicViewer extends React.Component{
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						If
 						<input placeholder='First' value={this.state.entries[index].forms.name} /> 
-						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} /> */}
 						
 						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} >
 							<option selected value="is a">is a</option>
@@ -176,7 +172,7 @@ class PublicViewer extends React.Component{
 					<div className={currentEntry.category + ' indent' + this.state.entries[index].forms.indent}>
 						While
 						<input placeholder='First' value={this.state.entries[index].forms.name} /> 
-						{/* <input placeholder='Condition' value={this.state.entries[index].forms.comparison} onChange={this._handleFormChange.bind({index:index, field: 'comparison', fetch: this._readEntries.bind(this)})} /> */}
+
 						<select placeholder='Condition' value={this.state.entries[index].forms.comparison} >
 							<option selected value="is a">is a</option>
 							<option value="is not a">is not a</option>
@@ -407,9 +403,9 @@ class PublicViewer extends React.Component{
 		if(this.state.textSelect === 'active'){
 			languageSelect =
 				<div className='languageSelect'>
-					<a className={this.state.plainText} onClick={this._selectPlainText.bind(this)} id='plainText' href=''>Plain Text</a>
-					<a className={this.state.js} onClick={this._selectJS.bind(this)} id='js' href=''>JS/Go/C/Java</a>
-					<a className={this.state.python} onClick={this._selectPython.bind(this)} id='python' href=''>Python/Ruby</a>
+					<a className={this.state.plainText} onClick={e => this._selectPlainText(e)} id='plainText' href=''>Plain Text</a>
+					<a className={this.state.js} onClick={e => this._selectJS(e)} id='js' href=''>JS/Go/C/Java</a>
+					<a className={this.state.python} onClick={e => this._selectPython(e)} id='python' href=''>Python/Ruby</a>
 				</div>;
 		}
 
@@ -420,8 +416,8 @@ class PublicViewer extends React.Component{
 					<h2>Project: <span id='projectTitle'> {this.props.project}</span> </h2>
 
 					<div id='selectViewer'>
-						<a className={this.state.editSelect} id="editSelect" onClick={this._selectEdit.bind(this)} href="">View Entries</a>
-						<a className={this.state.textSelect} id="textSelect" onClick={this._selectText.bind(this)} href="">Export Text</a>
+						<a className={this.state.editSelect} id="editSelect" onClick={e => this._selectEdit(e)} href="">View Entries</a>
+						<a className={this.state.textSelect} id="textSelect" onClick={e => this._selectText(e)} href="">Export Text</a>
 						{languageSelect}
 					</div>
 				</div>

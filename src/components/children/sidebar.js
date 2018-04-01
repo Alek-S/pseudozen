@@ -21,8 +21,6 @@ class Sidebar extends React.Component{
 		axios.post(window.location.origin + '/api/project/entry',{
 			title: window.location.search.slice(3),
 			newEntry: entry
-		}).then((response)=>{
-			// console.log(response.data);
 		});
 
 		function formObj(type){
