@@ -9,7 +9,7 @@ module.exports = function(app) {
 		}
 
 		if (req.session.loggedIn && req.session.loggedIn === true) {
-			res.sendFile(path.join(__dirname, '../public/projects.html'));
+			res.sendFile(path.join(__dirname, '../dist/projects.html'));
 		} else {
 			res.redirect('/');
 		}
@@ -20,6 +20,6 @@ module.exports = function(app) {
 			console.log({ projectQuery: req.query.p });
 		}
 
-		res.sendFile(path.join(__dirname, '../public/public.html'));
+		res.sendFile(path.join(__dirname, '../dist/public.html'));
 	});
 };

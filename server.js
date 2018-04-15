@@ -31,7 +31,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 
 //===Static Files, CSS,Images,Fonts===
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 
 //===Trust First Proxy===

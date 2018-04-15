@@ -9,8 +9,8 @@
   "scripts": {
     "test": "mocha --exit",
     "start": "node server.js",
-    "build": "webpack --progress -p",
-    "watch": "webpack -w",
+    "build": "webpack --progress --config ./webpack.prod.js",
+    "watch": "webpack --config ./webpack.dev.js -w",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
     "precommit": "lint-staged && npm test"
@@ -35,6 +35,7 @@
     "helmet": "^3.12.0",
     "mongoose": "^5.0.2",
     "morgan": "^1.9.0",
+    "nodemon": "^1.17.3",
     "path": "^0.12.7",
     "prop-types": "^15.6.1",
     "react": "^16.3.0",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "husky": "^0.14.3",
@@ -52,7 +54,8 @@
     "mocha": "^5.0.5",
     "prettier": "1.11.1",
     "supertest": "^3.0.0",
-    "webpack": "^3.11.0"
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
   },
   "snyk": true,
   "lint-staged": {
