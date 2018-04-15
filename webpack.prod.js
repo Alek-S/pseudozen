@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -7,10 +8,10 @@ module.exports = {
 	entry: './src/app.js',
 
 	// compiled output js
-	// output: {
-	// 	filename: './dist/assets/js/poop.js',
-	// 	// chunkFilename: './public/assets/js/[name]-[chunkhash].js',
-	// },
+	output: {
+		filename: 'assets/js/[name].js',
+		// chunkFilename: './public/assets/js/[name]-[chunkhash].js',
+	},
 
 
 	module: {
@@ -20,7 +21,9 @@ module.exports = {
 				test: /\.js?$/,
 				// only process files in src folder
 				include: /src/,
-				loader: 'babel-loader'
+				use: {
+					loader: 'babel-loader'
+				}
 			}
 		],
 	}, //end module
@@ -39,4 +42,26 @@ module.exports = {
 		
 		
 	],
+
+
+	optimization: {
+		//break out vendor module to seperate folder
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendor',
+					chunks: 'initial',
+				},
+			},
+		},
+		minimizer: [new UglifyWebpackPlugin({
+			//no console.log
+			uglifyOptions: {
+				compress: {
+					drop_console: true,
+				}
+			}
+		})],
+	}
 };

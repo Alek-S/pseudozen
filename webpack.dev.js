@@ -8,8 +8,8 @@ module.exports = {
 
 	// compiled output js
 	output: {
-		filename: 'public/assets/js/[name].js',
-		chunkFilename: 'public/assets/js/[name]-[chunkhash].js',
+		filename: 'assets/js/[name].js',
+		// chunkFilename: 'public/assets/js/[name]-[chunkhash].js',
 	},
 
 
@@ -19,16 +19,32 @@ module.exports = {
 				test: /\.js?$/,
 				// only process files in src folder
 				include: /src/,
-				loader: 'babel-loader'
+				use: {
+					loader: 'babel-loader'
+				}
 			}
 		],
-	}, //end module
+	},
 
 
 	plugins: [
 		//remove localization from moment.js (significantly reduces vendor.js)
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 	],
+
+
+	optimization: {
+		//break out vendor module to seperate folder
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendor',
+					chunks: 'initial',
+				},
+			},
+		},
+	},
 
 
 	devtool: 'eval-source-map'

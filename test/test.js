@@ -32,11 +32,11 @@ describe( chalk.yellow('::HTML Routes::\n'), function () {
 			.expect(200, done);
 	});
 
-	// it('responds to GET /assets/js/vendor.js', function(done) {
-	// 	request(server)
-	// 		.get('/assets/js/vendor.js')
-	// 		.expect(200, done);
-	// });
+	it('responds to GET /assets/js/vendor.js', function(done) {
+		request(server)
+			.get('/assets/js/vendor.js')
+			.expect(200, done);
+	});
 
 	it('responds to GET /assets/js/main.js', function(done) {
 		request(server)
