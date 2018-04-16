@@ -9,7 +9,6 @@ module.exports = {
 	// compiled output js
 	output: {
 		filename: 'assets/js/[name].js',
-		// chunkFilename: 'public/assets/js/[name]-[chunkhash].js',
 	},
 
 
