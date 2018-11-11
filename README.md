@@ -4,10 +4,6 @@
 
 # Pseudo Zen
 
-#### Try It Now: [https://pseudo-zen.com/](https://pseudo-zen.com/)
-<sub>Sandbox Account: { User: example@account.com, Password: foobar }</sub>
- 
-
 ![example](./screenshot/example.gif)
 
 Pseudo Zen is an online pseudocoder that makes pseudocoding as easy at it should be. With Pseudo Zen, there's no longer an excuse for not pseudo-coding your projects beforehand.
