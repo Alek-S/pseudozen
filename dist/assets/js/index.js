@@ -69,13 +69,13 @@ $(document).ready(function(){
 			$('#registerError').text('Passwords don\'t match');
 			$('#registerError').fadeIn(300);
 		}else{
-			console.log('here');
-			$.post(window.location.origin + '/api/user', {
+			console.log('!here!');
+			$.post('/api/user', {
 				email: email,
 				name: name,
 				password: password
 			}, function(res){
-
+					console.log(res);
 				if(res.status === 'success'){
 					//if registered - log in
 					$.post(window.location.origin + '/api/password', {

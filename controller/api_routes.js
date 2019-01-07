@@ -7,6 +7,21 @@ const Project = require('../model/Project.js');
 
 
 module.exports = function(app) {
+
+	app.get('/api/sanity/', (req, res) => {
+		res.json({
+			'status': 'sane',
+		});
+	});
+
+	app.get('/api/sanitycount/', (req, res) => {
+		User.count({}, (err, count) => {
+			res.json({ 
+				'status': 'sane',
+				'count': count,
+			});
+		});
+	});
 	
 	//=================
 	//===USER ROUTES===

@@ -22,4 +22,8 @@ module.exports = function(app) {
 
 		res.sendFile(path.join(__dirname, '../dist/public.html'));
 	});
+
+	app.get('/sanity', (req, res) => {
+		res.send('sane');
+	});
 };

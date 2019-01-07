@@ -35,7 +35,7 @@ app.use(express.static('dist'));
 
 
 //===Trust First Proxy===
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
 
 //===SESSIONS===
@@ -55,14 +55,18 @@ app.use(session({
 
 
 //===MongoDB Connection with Mongoose==
-mongoose.Promise = global.Promise; //use standard Promise instead of Mongo's promise library
-mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost/zen');
-const db = mongoose.connection;
+const connect = () => {
+mongoose.connect(
+	process.env.MONGOURL || 'mongodb://localhost:27017/zen',
+	{ useNewUrlParser: true })
+	.then(() => console.log('MongoDB Connected'))
+	.catch(err => console.log(err));
+}
 
-db.on('error', function(error) { // Show any mongoose errors
-	console.log(chalk.red('Mongoose Error: '), error);
-});
-
+setTimeout(
+	connect, 
+	process.env.DOCKER ? 15000 : 0 
+);
 
 //===Routes===
 require('./controller/html_routes.js')(app);
@@ -74,7 +78,7 @@ let server = app.listen(app.get('port'), function() {
 	if(process.env.PORT){
 		console.log('Running on Port:', app.get('port'),'\n' );
 	}else{
-		console.log(`Running on: http://localhost:${app.get('port')}\n` );
+		console.log(`Running on: http://localhost:${app.get('port')}` );
 	}
 });
 
