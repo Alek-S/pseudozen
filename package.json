@@ -39,7 +39,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
-    "snyk": "^1.41.1",
+    "snyk": "^1.76.0",
     "validator": "^9.4.1"
   },
   "devDependencies": {
